@@ -5,4 +5,6 @@ module edu.self.sams.studentattendancemanagementsystem {
 
     opens edu.self.sams to javafx.fxml;
     exports edu.self.sams;
+    exports edu.self.sams.controller;
+    opens edu.self.sams.controller to javafx.fxml;
 }
