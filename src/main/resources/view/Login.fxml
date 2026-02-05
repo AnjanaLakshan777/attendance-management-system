@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.loginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.LoginController">
    <children>
       <ImageView fitHeight="309.0" fitWidth="374.0" layoutX="8.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/images/StudentAttendance.png" />
          </image></ImageView>
-      <ComboBox layoutX="437.0" layoutY="233.0" prefWidth="150.0">
+      <ComboBox fx:id="comboRole" layoutX="437.0" layoutY="233.0" prefWidth="150.0">
        <items>
            <FXCollections fx:factory="observableArrayList">
                <String fx:value="Admin" />
@@ -30,8 +30,8 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <TextField layoutX="437.0" layoutY="141.0" />
-      <TextField layoutX="437.0" layoutY="188.0" />
+      <TextField fx:id="txtUsername" layoutX="437.0" layoutY="141.0" />
+      <TextField fx:id="txtPassword" layoutX="437.0" layoutY="188.0" />
       <Label layoutX="339.0" layoutY="140.0" style="-fx-font-weight: bold;" text="Username">
          <font>
             <Font size="18.0" />
@@ -47,7 +47,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="431.0" layoutY="305.0" mnemonicParsing="false" style="-fx-background-color: #0e75eb;" text="Login" textFill="WHITE">
+      <Button layoutX="431.0" layoutY="305.0" mnemonicParsing="false" onAction="#clickLogin" style="-fx-background-color: #0e75eb;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

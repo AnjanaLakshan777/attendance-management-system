@@ -1,0 +1,11 @@
+create table users(
+user_id  int  primary key,
+username varchar(50) not null unique,
+password varchar(50) not null,
+full_name varchar(50) not null,
+role varchar(10) not null,
+email varchar(50) not null
+);
+
+insert into users values(1,'anjana','1234','Anjana Lakshan','admin','anjana@gmail.com');
+
