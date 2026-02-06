@@ -14,9 +14,7 @@ public class ServiceFactory {
 
     public SuperService getService(ServiceType serviceType) {
         switch (serviceType) {
-            case ADMIN:
-                return null;
-            case LECTURER:
+            case USER:
                 return null;
             default:
                 return null;
@@ -24,7 +22,6 @@ public class ServiceFactory {
     }
 
     public enum ServiceType {
-        ADMIN,
-        LECTURER,
+        USER,
     }
 }

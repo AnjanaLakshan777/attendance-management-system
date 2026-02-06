@@ -11,26 +11,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(UserEntity userEntity) throws Exception {
-        return CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?,?,?,?)",userEntity.getUserId(),userEntity.getUserName(),userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail());
+        return CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?,?,?,?)",userEntity.getUserId(),userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail());
     }
 
     @Override
     public boolean update(UserEntity userEntity) throws Exception {
-        return CrudUtil.executeUpdate("UPDATE user SET username=?, password=?, full_name=?, role=?, email=? WHERE username=?",userEntity.getUserName(),userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail());
+        return CrudUtil.executeUpdate("UPDATE user SET password=?, full_name=?, role=?, email=? WHERE user_id=?",userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail(),userEntity.getUserId());
     }
 
     @Override
-    public boolean delete(String s) throws Exception {
-        return CrudUtil.executeUpdate("DELETE FROM user WHERE username=?",s);
+    public boolean delete(String userId) throws Exception {
+        return CrudUtil.executeUpdate("DELETE FROM user WHERE user_id=?",userId);
     }
 
     @Override
-    public UserEntity get(String s) throws Exception {
-        ResultSet rst =  CrudUtil.executeQuery("SELECT * FROM user WHERE username=?",s);
+    public UserEntity get(String userId) throws Exception {
+        ResultSet rst =  CrudUtil.executeQuery("SELECT * FROM user WHERE user_id=?",userId);
         if(rst.next()){
             return new  UserEntity(
-                    rst.getInt("user_id"),
-                    rst.getString("username"),
+                    rst.getString("user_id"),
                     rst.getString("password"),
                     rst.getString("full_name"),
                     rst.getString("role"),
@@ -46,8 +45,7 @@ public class UserDaoImpl implements UserDao {
         ArrayList<UserEntity> userEntities = new ArrayList<>();
         while (rst.next()) {
             userEntities.add(new UserEntity(
-                    rst.getInt("user_id"),
-                    rst.getString("username"),
+                    rst.getString("user_id"),
                     rst.getString("password"),
                     rst.getString("full_name"),
                     rst.getString("role"),

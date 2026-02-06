@@ -1,8 +1,7 @@
 package edu.self.sams.dto;
 
 public class UserDto {
-    private int userId;
-    private String userName;
+    private String userId;
     private String password;
     private String fullName;
     private String role;
@@ -11,29 +10,20 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(int userId, String userName, String password, String fullName, String role, String email) {
+    public UserDto(String userId, String password, String fullName, String role, String email) {
         this.userId = userId;
-        this.userName = userName;
         this.password = password;
         this.fullName = fullName;
         this.role = role;
         this.email = email;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {

@@ -30,9 +30,9 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUsername" layoutX="437.0" layoutY="141.0" />
+      <TextField fx:id="txtUserId" layoutX="437.0" layoutY="141.0" />
       <TextField fx:id="txtPassword" layoutX="437.0" layoutY="188.0" />
-      <Label layoutX="339.0" layoutY="140.0" style="-fx-font-weight: bold;" text="Username">
+      <Label layoutX="339.0" layoutY="140.0" style="-fx-font-weight: bold;" text="UserID">
          <font>
             <Font size="18.0" />
          </font>
