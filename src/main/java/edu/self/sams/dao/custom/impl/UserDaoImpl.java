@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(UserEntity userEntity) throws Exception {
-        return CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?,?,?,?)",userEntity.getUserId(),userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail());
+        return CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?,?,?)",userEntity.getUserId(),userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail());
     }
 
     @Override

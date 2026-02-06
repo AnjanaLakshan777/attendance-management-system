@@ -1,5 +1,7 @@
 package edu.self.sams.service;
 
+import edu.self.sams.service.custom.impl.UserServiceImpl;
+
 public class ServiceFactory {
     private static ServiceFactory serviceFactory;
 
@@ -15,7 +17,7 @@ public class ServiceFactory {
     public SuperService getService(ServiceType serviceType) {
         switch (serviceType) {
             case USER:
-                return null;
+                return new UserServiceImpl();
             default:
                 return null;
         }
