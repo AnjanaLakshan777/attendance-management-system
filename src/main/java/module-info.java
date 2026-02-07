@@ -3,10 +3,17 @@ module edu.self.sams.studentattendancemanagementsystem {
     requires javafx.fxml;
     requires java.xml;
     requires java.sql;
+    requires org.hibernate.orm.core;
+    requires jakarta.persistence;
+    requires java.naming;
 
 
     opens edu.self.sams to javafx.fxml;
+    opens edu.self.sams.entity to org.hibernate.orm.core;
+
     exports edu.self.sams;
     exports edu.self.sams.controller;
+    exports edu.self.sams.entity;
+
     opens edu.self.sams.controller to javafx.fxml;
 }

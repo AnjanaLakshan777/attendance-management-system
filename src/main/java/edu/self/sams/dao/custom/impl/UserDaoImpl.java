@@ -1,57 +1,80 @@
 package edu.self.sams.dao.custom.impl;
 
-import edu.self.sams.dao.CrudUtil;
 import edu.self.sams.dao.custom.UserDao;
 import edu.self.sams.entity.UserEntity;
+import edu.self.sams.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class UserDaoImpl implements UserDao {
 
     @Override
     public boolean save(UserEntity userEntity) throws Exception {
-        return CrudUtil.executeUpdate("INSERT INTO user VALUES(?,?,?,?,?)",userEntity.getUserId(),userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail());
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.persist(userEntity);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public boolean update(UserEntity userEntity) throws Exception {
-        return CrudUtil.executeUpdate("UPDATE user SET password=?, full_name=?, role=?, email=? WHERE user_id=?",userEntity.getPassword(),userEntity.getFullName(),userEntity.getRole(),userEntity.getEmail(),userEntity.getUserId());
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.merge(userEntity);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public boolean delete(String userId) throws Exception {
-        return CrudUtil.executeUpdate("DELETE FROM user WHERE user_id=?",userId);
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            UserEntity userEntity = session.find(UserEntity.class, userId);
+            if (userEntity != null) {
+                session.remove(userEntity);
+                transaction.commit();
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        }
     }
 
     @Override
     public UserEntity get(String userId) throws Exception {
-        ResultSet rst =  CrudUtil.executeQuery("SELECT * FROM user WHERE user_id=?",userId);
-        if(rst.next()){
-            return new  UserEntity(
-                    rst.getString("user_id"),
-                    rst.getString("password"),
-                    rst.getString("full_name"),
-                    rst.getString("role"),
-                    rst.getString("email")
-            );
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.find(UserEntity.class, userId);
         }
-        return null;
     }
 
     @Override
     public ArrayList<UserEntity> getAll() throws Exception {
-        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM user");
-        ArrayList<UserEntity> userEntities = new ArrayList<>();
-        while (rst.next()) {
-            userEntities.add(new UserEntity(
-                    rst.getString("user_id"),
-                    rst.getString("password"),
-                    rst.getString("full_name"),
-                    rst.getString("role"),
-                    rst.getString("email"))
-            );
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<UserEntity> query = session.createQuery("FROM UserEntity", UserEntity.class);
+            return new ArrayList<>(query.list());
         }
-        return userEntities;
     }
 }

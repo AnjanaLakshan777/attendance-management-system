@@ -1,10 +1,23 @@
 package edu.self.sams.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="user")
 public class UserEntity {
+    @Id
+    @Column(name="user_id", nullable=false, length=50)
     private String userId;
+    @Column(name="password",  nullable=false, length=50)
     private String password;
+    @Column(name="full_name",   nullable=false, length=50)
     private String fullName;
+    @Column(name="role", nullable = false, length=50)
     private String role;
+    @Column(name="email", nullable = false, length=50)
     private String email;
 
     public UserEntity() {
