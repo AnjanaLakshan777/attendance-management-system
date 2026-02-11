@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ancAdminDashboard" prefHeight="506.0" prefWidth="715.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.AdminDashboardController">
+<AnchorPane fx:id="ancReport" prefHeight="506.0" prefWidth="715.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.ReportController">
    <children>
-      <Label layoutX="344.0" layoutY="22.0" style="-fx-font-weight: bold;" text="Admin dashboard" textAlignment="CENTER">
+      <Label layoutX="408.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Reports" textAlignment="CENTER">
          <font>
             <Font size="30.0" />
          </font>
@@ -22,7 +22,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="13.0" layoutY="124.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Dashboard">
+            <Button layoutX="13.0" layoutY="124.0" mnemonicParsing="false" onAction="#goToDashboard" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Dashboard">
                <font>
                   <Font size="15.0" />
                </font>
@@ -47,7 +47,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="389.0" mnemonicParsing="false" onAction="#goToReports" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Reports">
+            <Button layoutX="14.0" layoutY="389.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Reports">
                <font>
                   <Font size="15.0" />
                </font>

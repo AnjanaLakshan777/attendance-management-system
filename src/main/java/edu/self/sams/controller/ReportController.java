@@ -8,14 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StudentController {
+public class ReportController {
 
-    public AnchorPane ancStudent;
+    public AnchorPane ancReport;
 
-    public static void loadStudent() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(StudentController.class.getResource("/view/Student.fxml"));
+    public static void loadReport() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(ReportController.class.getResource("/view/Report.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("Student");
+        stage.setTitle("Reports");
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();
@@ -23,45 +23,43 @@ public class StudentController {
 
     public void goToDashboard(ActionEvent actionEvent) throws IOException{
         AdminDashboardController.loadAdminDashboard();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
     }
 
     public void goToCourses(ActionEvent actionEvent) throws IOException{
         CourseController.loadCourse();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
     }
 
     public void goToSubjects(ActionEvent actionEvent) throws IOException{
         SubjectController.loadSubject();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
+        preScene.close();
+    }
+
+    public void goToStudents(ActionEvent actionEvent) throws IOException{
+        StudentController.loadStudent();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
     }
 
     public void goToLecturers(ActionEvent actionEvent) throws IOException{
         LecturerController.loadLecture();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException{
         ScheduleClassController.loadScheduleClass();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
-
-    }
-
-    public void goToReports(ActionEvent actionEvent) throws IOException{
-        ReportController.loadReport();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
-        preScene.close();
-
     }
 
     public void logOut(ActionEvent actionEvent) throws IOException{
         LoginController.loadLogin();
-        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
     }
 }

@@ -12,12 +12,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class LoginController {
 
     public TextField txtUserId;
     public PasswordField txtPassword;
     public ComboBox comboRole;
     public AnchorPane ancLogin;
+
+    public static void loadLogin() throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(LoginController.class.getResource("/view/Login.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Subjects");
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     private UserService userService = (UserService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.USER);
 
@@ -43,7 +54,7 @@ public class LoginController {
             }
         } else if (role.equals("Lecture")) {
             if(userService.userLogin(userId,password,role)){
-                AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/LectureDashboard.fxml"));
+                AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/LecturerDashboard.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Lecture Dashboard");
                 Scene scene = new Scene(anchorPane);

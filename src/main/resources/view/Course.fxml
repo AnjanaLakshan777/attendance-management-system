@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="506.0" prefWidth="760.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.CourseController">
+<AnchorPane fx:id="ancCourse" prefHeight="506.0" prefWidth="760.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.CourseController">
    <children>
       <Label layoutX="351.0" layoutY="23.0" style="-fx-font-weight: bold;" text="Courses Management" textAlignment="CENTER">
          <font>
@@ -36,7 +36,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="434.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
+      <Button layoutX="652.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -46,7 +46,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="652.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
+      <Button layoutX="439.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -63,12 +63,12 @@
       </TableView>
       <Pane prefHeight="506.0" prefWidth="215.0" style="-fx-background-color: #0d6cd9;">
          <children>
-            <Button layoutX="69.0" layoutY="455.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Log out" textFill="WHITE">
+            <Button layoutX="69.0" layoutY="455.0" mnemonicParsing="false" onAction="#logOut" prefHeight="27.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Log out" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="13.0" layoutY="124.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Dashboard">
+            <Button layoutX="13.0" layoutY="124.0" mnemonicParsing="false" onAction="#goToDashboard" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Dashboard">
                <font>
                   <Font size="15.0" />
                </font>
@@ -78,22 +78,22 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="257.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Students">
+            <Button layoutX="14.0" layoutY="257.0" mnemonicParsing="false" onAction="#goToStudents" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Students">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="13.0" layoutY="302.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Lecturers">
+            <Button layoutX="13.0" layoutY="302.0" mnemonicParsing="false" onAction="#goToLecturers" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Lecturers">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="13.0" layoutY="214.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-font-weight: bold; -fx-background-color: white;" text="Subjects">
+            <Button layoutX="13.0" layoutY="214.0" mnemonicParsing="false" onAction="#goToSubjects" prefHeight="34.0" prefWidth="187.0" style="-fx-font-weight: bold; -fx-background-color: white;" text="Subjects">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="389.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Reports">
+            <Button layoutX="14.0" layoutY="389.0" mnemonicParsing="false" onAction="#goToReports" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Reports">
                <font>
                   <Font size="15.0" />
                </font>
@@ -103,12 +103,13 @@
                   <Image url="@../assets/images/StudentAttendance.png" />
                </image>
             </ImageView>
-            <Button layoutX="14.0" layoutY="345.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Schedule Class">
+            <Button layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#goToScheduleClass" prefHeight="34.0" prefWidth="187.0" style="-fx-background-color: white; -fx-font-weight: bold;" text="Schedule Class">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
          </children>
       </Pane>
+      <Button layoutX="545.0" layoutY="91.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Search" textFill="WHITE" />
    </children>
 </AnchorPane>
