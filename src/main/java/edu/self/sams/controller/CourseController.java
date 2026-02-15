@@ -184,6 +184,8 @@ public class CourseController implements Initializable {
                 txtCourseCode.setText(courseDto.getCourseCode());
                 txtCourseName.setText(courseDto.getCourseName());
                 txtDuration.setText(courseDto.getDuration());
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Course not found").showAndWait();
             }
 
         } catch (Exception e) {

@@ -19,8 +19,8 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="380.0" layoutY="91.0" prefHeight="27.0" prefWidth="166.0" />
-      <TextField layoutX="380.0" layoutY="139.0" prefHeight="27.0" prefWidth="267.0" />
+      <TextField fx:id="txtSubjectCode" layoutX="380.0" layoutY="91.0" prefHeight="27.0" prefWidth="166.0" />
+      <TextField fx:id="txtSubjectName" layoutX="380.0" layoutY="139.0" prefHeight="27.0" prefWidth="267.0" />
       <Label layoutX="242.0" layoutY="185.0" prefHeight="27.0" prefWidth="114.0" style="-fx-font-weight: bold;" text="Course Name">
          <font>
             <Font size="18.0" />
@@ -36,17 +36,17 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="654.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
+      <Button layoutX="654.0" layoutY="225.0" mnemonicParsing="false" onAction="#clickSave" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="545.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Update" textFill="WHITE">
+      <Button layoutX="545.0" layoutY="225.0" mnemonicParsing="false" onAction="#clickUpdate" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Update" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="435.0" layoutY="225.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
+      <Button layoutX="435.0" layoutY="225.0" mnemonicParsing="false" onAction="#clickDelete" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -61,8 +61,8 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ComboBox layoutX="380.0" layoutY="185.0" prefHeight="27.0" prefWidth="267.0" style="-fx-background-color: ffffff; -fx-border-color: #bababa;" />
-      <Button layoutX="564.0" layoutY="90.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Search" textFill="WHITE" />
+      <ComboBox fx:id="comboCourseName" layoutX="380.0" layoutY="185.0" prefHeight="27.0" prefWidth="267.0" style="-fx-background-color: ffffff; -fx-border-color: #bababa;" />
+      <Button layoutX="564.0" layoutY="90.0" mnemonicParsing="false" onAction="#clickSearch" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Search" textFill="WHITE" />
       <Pane prefHeight="506.0" prefWidth="215.0" style="-fx-background-color: #0d6cd9;">
          <children>
             <Button layoutX="69.0" layoutY="455.0" mnemonicParsing="false" onAction="#logOut" prefHeight="27.0" prefWidth="74.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Log out" textFill="WHITE">

@@ -28,6 +28,7 @@
 
         <mapping class="edu.self.sams.entity.UserEntity"/>
         <mapping class="edu.self.sams.entity.CourseEntity"/>
+        <mapping class="edu.self.sams.entity.SubjectEntity"/>
 
     </session-factory>
 </hibernate-configuration>
