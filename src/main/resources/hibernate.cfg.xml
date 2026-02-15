@@ -27,6 +27,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="edu.self.sams.entity.UserEntity"/>
+        <mapping class="edu.self.sams.entity.CourseEntity"/>
 
     </session-factory>
 </hibernate-configuration>

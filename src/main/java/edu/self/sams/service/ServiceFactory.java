@@ -1,5 +1,6 @@
 package edu.self.sams.service;
 
+import edu.self.sams.service.custom.impl.CourseServiceImpl;
 import edu.self.sams.service.custom.impl.UserServiceImpl;
 
 public class ServiceFactory {
@@ -18,12 +19,14 @@ public class ServiceFactory {
         switch (serviceType) {
             case USER:
                 return new UserServiceImpl();
+            case COURSE:
+                return new CourseServiceImpl();
             default:
                 return null;
         }
     }
 
     public enum ServiceType {
-        USER,
+        USER,COURSE
     }
 }
