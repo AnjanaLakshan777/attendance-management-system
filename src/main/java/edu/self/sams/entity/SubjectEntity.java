@@ -1,9 +1,9 @@
 package edu.self.sams.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="subject")
@@ -13,6 +13,9 @@ public class SubjectEntity {
     private String subjectCode;
     @Column(name="subject_name", nullable=false, length=50)
     private String subjectName;
+
+    @ManyToMany(mappedBy="subjects")
+    private Set<CourseEntity> courses = new HashSet<>();
 
     public SubjectEntity() {
     }
@@ -36,5 +39,13 @@ public class SubjectEntity {
 
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
+    }
+
+    public Set<CourseEntity> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<CourseEntity> courses) {
+        this.courses = courses;
     }
 }

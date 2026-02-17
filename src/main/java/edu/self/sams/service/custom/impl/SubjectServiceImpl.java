@@ -5,7 +5,6 @@ import edu.self.sams.dao.custom.SubjectDao;
 import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.service.custom.SubjectService;
-
 import java.util.ArrayList;
 
 public class SubjectServiceImpl implements SubjectService {

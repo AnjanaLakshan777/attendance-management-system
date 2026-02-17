@@ -3,16 +3,20 @@ package edu.self.sams.controller;
 import edu.self.sams.dto.CourseDto;
 import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.service.ServiceFactory;
-import edu.self.sams.service.custom.CourseService;
 import edu.self.sams.service.custom.SubjectService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -30,10 +34,13 @@ public class SubjectController implements Initializable {
     @FXML
     private AnchorPane ancSubject;
     @FXML
-    private ComboBox comboCourseName;
+    private TableView<SubjectDto> tblSubject;
+    @FXML
+    private TableColumn<SubjectDto,String> colSubjectCode;
+    @FXML
+    private TableColumn<SubjectDto,String> colSubjectName;
 
     private SubjectService subjectService = (SubjectService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SUBJECT);
-    private CourseService courseService = (CourseService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.COURSE);
 
     public static void loadSubject() throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(SubjectController.class.getResource("/view/Subject.fxml"));
@@ -90,7 +97,6 @@ public class SubjectController implements Initializable {
     public void clickSave(ActionEvent actionEvent) {
         String subjectCode = txtSubjectCode.getText().trim();
         String subjectName = txtSubjectName.getText().trim();
-        String courseName = comboCourseName.getValue().toString().trim();
 
         SubjectDto subjectDto = new SubjectDto(subjectCode, subjectName);
 
@@ -133,13 +139,18 @@ public class SubjectController implements Initializable {
     }
 
     private void loadTable(){
-
+        try{
+            ArrayList<SubjectDto> subjectDtos = subjectService.getSubjects();
+            ObservableList<SubjectDto> list = FXCollections.observableArrayList(subjectDtos);
+            tblSubject.setItems(list);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void clearFields(){
         txtSubjectCode.clear();
         txtSubjectName.clear();
-        comboCourseName.setValue(null);
     }
 
     public void clickSearch(ActionEvent actionEvent) {
@@ -159,19 +170,17 @@ public class SubjectController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadCourses();
+        colSubjectCode.setCellValueFactory(new PropertyValueFactory<>("subjectCode"));
+        colSubjectName.setCellValueFactory(new PropertyValueFactory<>("subjectName"));
+        loadTable();
     }
 
-    private void loadCourses(){
-        try {
-            ArrayList<CourseDto> courseDtos = courseService.getCourses();
-            if(courseDtos != null){
-                for(CourseDto courseDto : courseDtos){
-                    comboCourseName.getItems().add(courseDto.getCourseName());
-                }
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public void onTableClick(MouseEvent mouseEvent) {
+        SubjectDto selectedItem = tblSubject.getSelectionModel().getSelectedItem();
+        if(selectedItem!=null){
+            txtSubjectCode.setText(selectedItem.getSubjectCode());
+            txtSubjectName.setText(selectedItem.getSubjectName());
         }
     }
+
 }

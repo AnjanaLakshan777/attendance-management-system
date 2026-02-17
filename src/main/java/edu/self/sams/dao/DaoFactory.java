@@ -1,6 +1,7 @@
 package edu.self.sams.dao;
 
 import edu.self.sams.dao.custom.impl.CourseDaoImpl;
+import edu.self.sams.dao.custom.impl.StudentDaoImpl;
 import edu.self.sams.dao.custom.impl.SubjectDaoImpl;
 import edu.self.sams.dao.custom.impl.UserDaoImpl;
 
@@ -25,12 +26,14 @@ public class DaoFactory {
                 return new CourseDaoImpl();
             case SUBJECT:
                 return new SubjectDaoImpl();
+            case STUDENT:
+                return new StudentDaoImpl();
             default:
                 return null;
         }
     }
 
     public enum daoType{
-        USER, COURSE, SUBJECT
+        USER, COURSE, SUBJECT, STUDENT
     }
 }

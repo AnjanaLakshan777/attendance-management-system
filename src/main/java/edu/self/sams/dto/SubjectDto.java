@@ -1,5 +1,8 @@
 package edu.self.sams.dto;
 
+
+import java.util.List;
+
 public class SubjectDto {
     private String subjectCode;
     private String subjectName;
@@ -27,4 +30,5 @@ public class SubjectDto {
     public void setSubjectName(String subjectName) {
         this.subjectName = subjectName;
     }
+
 }
