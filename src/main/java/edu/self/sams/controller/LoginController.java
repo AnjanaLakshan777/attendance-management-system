@@ -3,6 +3,7 @@ package edu.self.sams.controller;
 import edu.self.sams.service.ServiceFactory;
 import edu.self.sams.service.custom.UserService;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,10 +17,14 @@ import java.io.IOException;
 
 public class LoginController {
 
-    public TextField txtUserId;
-    public PasswordField txtPassword;
-    public ComboBox comboRole;
-    public AnchorPane ancLogin;
+    @FXML
+    private TextField txtUserId;
+    @FXML
+    private PasswordField txtPassword;
+    @FXML
+    private ComboBox comboRole;
+    @FXML
+    private AnchorPane ancLogin;
 
     public static void loadLogin() throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(LoginController.class.getResource("/view/Login.fxml"));
@@ -52,7 +57,7 @@ public class LoginController {
             }else{
                 new Alert(Alert.AlertType.ERROR, "Invalid UserID or Password.").showAndWait();
             }
-        } else if (role.equals("Lecture")) {
+        } else if (role.equals("Lecturer")) {
             if(userService.userLogin(userId,password,role)){
                 AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/LecturerDashboard.fxml"));
                 Stage stage = new Stage();

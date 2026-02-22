@@ -30,6 +30,7 @@
         <mapping class="edu.self.sams.entity.CourseEntity"/>
         <mapping class="edu.self.sams.entity.SubjectEntity"/>
         <mapping class="edu.self.sams.entity.StudentEntity"/>
+        <mapping class="edu.self.sams.entity.LecturerEntity"/>
 
     </session-factory>
 </hibernate-configuration>

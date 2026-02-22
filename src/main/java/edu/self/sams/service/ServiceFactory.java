@@ -1,9 +1,6 @@
 package edu.self.sams.service;
 
-import edu.self.sams.service.custom.impl.CourseServiceImpl;
-import edu.self.sams.service.custom.impl.StudentServiceImpl;
-import edu.self.sams.service.custom.impl.SubjectServiceImpl;
-import edu.self.sams.service.custom.impl.UserServiceImpl;
+import edu.self.sams.service.custom.impl.*;
 
 public class ServiceFactory {
     private static ServiceFactory serviceFactory;
@@ -27,12 +24,14 @@ public class ServiceFactory {
                 return new SubjectServiceImpl();
             case STUDENT:
                 return new StudentServiceImpl();
+            case LECTURER:
+                return new LecturerServiceImpl();
             default:
                 return null;
         }
     }
 
     public enum ServiceType {
-        USER,COURSE,SUBJECT,STUDENT
+        USER,COURSE,SUBJECT,STUDENT, LECTURER
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -68,10 +68,10 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="331.0" layoutY="91.0" prefHeight="27.0" prefWidth="149.0" />
-      <TextField layoutX="331.0" layoutY="133.0" prefHeight="27.0" prefWidth="404.0" />
-      <TextField layoutX="331.0" layoutY="177.0" prefHeight="27.0" prefWidth="166.0" />
-      <Label layoutX="244.0" layoutY="91.0" prefHeight="27.0" prefWidth="74.0" style="-fx-font-weight: bold;" text="Reg. No">
+      <TextField fx:id="txtUserId" layoutX="331.0" layoutY="91.0" prefHeight="27.0" prefWidth="149.0" />
+      <TextField fx:id="txtName" layoutX="331.0" layoutY="133.0" prefHeight="27.0" prefWidth="404.0" />
+      <TextField fx:id="txtEmail" layoutX="331.0" layoutY="177.0" prefHeight="27.0" prefWidth="166.0" />
+      <Label layoutX="244.0" layoutY="91.0" prefHeight="27.0" prefWidth="66.0" style="-fx-font-weight: bold;" text="User ID">
          <font>
             <Font size="18.0" />
          </font>
@@ -86,28 +86,27 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="652.0" layoutY="258.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
+      <Button layoutX="652.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickOnSave" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="545.0" layoutY="258.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Update" textFill="WHITE">
+      <Button layoutX="545.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Update" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="438.0" layoutY="258.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
+      <Button layoutX="438.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickOnDelete" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <TableView layoutX="244.0" layoutY="317.0" prefHeight="171.0" prefWidth="501.0">
+      <TableView fx:id="tblLecturer" layoutX="244.0" layoutY="317.0" onMouseClicked="#onTableClick" prefHeight="171.0" prefWidth="501.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="Reg. No" />
-            <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="E-mail" />
-            <TableColumn prefWidth="75.0" text="Tele. No" />
-            <TableColumn prefWidth="75.0" text="Subject" />
+            <TableColumn fx:id="colUserId" prefWidth="75.0" text="User ID" />
+            <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="colEmail" prefWidth="75.0" text="E-mail" />
+            <TableColumn fx:id="colTeleNo" prefWidth="75.0" text="Tele. No" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -118,13 +117,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="620.0" layoutY="177.0" prefHeight="27.0" prefWidth="114.0" />
-      <Label layoutX="244.0" layoutY="218.0" prefHeight="27.0" prefWidth="67.0" style="-fx-font-weight: bold;" text="Subject">
+      <TextField fx:id="txtTeleNo" layoutX="620.0" layoutY="177.0" prefHeight="27.0" prefWidth="114.0" />
+      <Button layoutX="500.0" layoutY="90.0" mnemonicParsing="false" onAction="#clickOnSearch" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Search" textFill="WHITE" />
+      <PasswordField fx:id="txtPassword" layoutX="331.0" layoutY="220.0" prefHeight="27.0" prefWidth="166.0" />
+      <Label layoutX="244.0" layoutY="220.0" prefHeight="27.0" prefWidth="81.0" style="-fx-font-weight: bold;" text="Password">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox layoutX="331.0" layoutY="219.0" prefHeight="27.0" prefWidth="166.0" style="-fx-background-color: ffffff; -fx-border-color: #bababa;" />
-      <Button layoutX="500.0" layoutY="90.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="54.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Search" textFill="WHITE" />
    </children>
 </AnchorPane>

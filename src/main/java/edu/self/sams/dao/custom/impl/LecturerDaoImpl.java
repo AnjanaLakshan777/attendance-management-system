@@ -1,7 +1,7 @@
 package edu.self.sams.dao.custom.impl;
 
-import edu.self.sams.dao.custom.StudentDao;
-import edu.self.sams.entity.StudentEntity;
+import edu.self.sams.dao.custom.LecturerDao;
+import edu.self.sams.entity.LecturerEntity;
 import edu.self.sams.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,15 +9,15 @@ import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 
-public class StudentDaoImpl implements StudentDao {
+public class LecturerDaoImpl implements LecturerDao {
     @Override
-    public boolean save(StudentEntity studentEntity) throws Exception {
+    public boolean save(LecturerEntity lecturerEntity) throws Exception {
         Session session = null;
         Transaction transaction = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.persist(studentEntity);
+            session.persist(lecturerEntity);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -25,21 +25,21 @@ public class StudentDaoImpl implements StudentDao {
                 transaction.rollback();
             }
             throw e;
-        } finally {
-            if(session != null) {
+        }finally {
+            if(session!=null){
                 session.close();
             }
         }
     }
 
     @Override
-    public boolean update(StudentEntity studentEntity) throws Exception {
+    public boolean update(LecturerEntity lecturerEntity) throws Exception {
         Session session = null;
         Transaction transaction = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.merge(studentEntity);
+            session.merge(lecturerEntity);
             transaction.commit();
             return true;
         }catch(Exception e){
@@ -47,61 +47,61 @@ public class StudentDaoImpl implements StudentDao {
                 transaction.rollback();
             }
             throw e;
-        } finally {
-            if(session != null) {
+        }finally {
+            if(session!=null){
                 session.close();
             }
         }
     }
 
     @Override
-    public boolean delete(String regNo) throws Exception {
+    public boolean delete(String userId) throws Exception {
         Session session = null;
         Transaction transaction = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            StudentEntity studentEntity = session.find(StudentEntity.class, regNo);
-            if(studentEntity!=null){
-                session.remove(studentEntity);
+            LecturerEntity lecturerEntity = session.find(LecturerEntity.class, userId);
+            if(lecturerEntity!=null){
+                session.remove(lecturerEntity);
                 transaction.commit();
                 return true;
             }
             return false;
-        }catch(Exception e){
+        } catch (Exception e) {
             if(transaction!=null){
                 transaction.rollback();
             }
             throw e;
-        } finally {
-            if(session != null) {
+        }finally {
+            if(session!=null){
                 session.close();
             }
         }
     }
 
     @Override
-    public StudentEntity get(String regNo) throws Exception {
+    public LecturerEntity get(String userId) throws Exception {
         Session session = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
-            return session.find(StudentEntity.class,regNo);
+            return session.find(LecturerEntity.class, userId);
         } finally {
-            if(session != null) {
+            if(session!=null){
                 session.close();
             }
         }
     }
 
     @Override
-    public ArrayList<StudentEntity> getAll() throws Exception {
+    public ArrayList<LecturerEntity> getAll() throws Exception {
         Session session = null;
-        try{
+        try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery("FROM StudentEntity ",StudentEntity.class);
+            Query query = session.createQuery("from LecturerEntity");
             return new ArrayList<>(query.list());
         } finally {
-            if(session != null) {
+            if(session!=null){
                 session.close();
             }
         }

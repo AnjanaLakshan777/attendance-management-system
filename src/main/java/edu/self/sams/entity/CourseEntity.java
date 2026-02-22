@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(name="course")
 public class CourseEntity {
     @Id
-    @Column(name="course_code", nullable=false, length=50)
+    @Column(name="course_code", length=50)
     private String courseCode;
     @Column(name="course_name", nullable=false, length=50)
     private String courseName;

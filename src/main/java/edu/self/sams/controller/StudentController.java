@@ -164,7 +164,7 @@ public class StudentController implements Initializable {
                 new Alert(Alert.AlertType.ERROR,"Student not found").showAndWait();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
     }
 

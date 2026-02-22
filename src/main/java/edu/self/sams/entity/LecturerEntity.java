@@ -1,16 +1,13 @@
 package edu.self.sams.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="student")
-public class StudentEntity {
+@Table(name="lecturer")
+public class LecturerEntity {
     @Id
-    @Column(name="reg_no", length=50)
-    private String regNo;
+    @Column(name="user_id", length=50)
+    private String userId;
     @Column(name="name", nullable=false, length=50)
     private String name;
     @Column(name="email", nullable=false, length=50)
@@ -18,21 +15,28 @@ public class StudentEntity {
     @Column(name="tele_no", nullable=false, length=50)
     private String teleNo;
 
-    public StudentEntity() {
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @MapsId
+    @JoinColumn(name="user_id")
+    private UserEntity userEntity;
+
+    public LecturerEntity() {
     }
-    public StudentEntity(String regNo, String name, String email, String teleNo) {
-        this.regNo = regNo;
+
+    public LecturerEntity(String userId, String name, String email, String teleNo, UserEntity userEntity) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.teleNo = teleNo;
+        this.userEntity = userEntity;
     }
 
-    public String getRegNo() {
-        return regNo;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setRegNo(String regNo) {
-        this.regNo = regNo;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -57,5 +61,13 @@ public class StudentEntity {
 
     public void setTeleNo(String teleNo) {
         this.teleNo = teleNo;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

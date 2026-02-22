@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     public boolean userLogin(String userId, String password, String role) throws Exception {
         UserEntity userEntity = userDao.get(userId);
         if(userEntity != null){
-            if(userEntity.getPassword().equals(password) && userEntity.getRole().equals(role)){
+            if(userEntity.getPassword().equals(password) && userEntity.getRole().equalsIgnoreCase(role)){
                 return true;
             }
         }
