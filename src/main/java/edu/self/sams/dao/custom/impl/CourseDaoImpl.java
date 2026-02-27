@@ -2,6 +2,7 @@ package edu.self.sams.dao.custom.impl;
 
 import edu.self.sams.dao.custom.CourseDao;
 import edu.self.sams.entity.CourseEntity;
+import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -101,6 +102,70 @@ public class CourseDaoImpl implements CourseDao {
             session = HibernateUtil.getSessionFactory().openSession();
             Query query = session.createQuery("FROM CourseEntity",CourseEntity.class);
             return new ArrayList<>(query.list());
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public boolean assignSubject(String courseCode, String subjectCode) throws Exception {
+        Session session = null;
+        Transaction transaction = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            
+            CourseEntity course = session.find(CourseEntity.class, courseCode);
+            SubjectEntity subject = session.find(SubjectEntity.class, subjectCode);
+            
+            if(course != null && subject != null){
+                if(!course.getSubjects().contains(subject)){
+                    course.getSubjects().add(subject);
+                    session.merge(course);
+                    transaction.commit();
+                    return true;
+                }
+            }
+            return false;
+        }catch(Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            throw e;
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public boolean unassignSubject(String courseCode, String subjectCode) throws Exception {
+        Session session = null;
+        Transaction transaction = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            
+            CourseEntity course = session.find(CourseEntity.class, courseCode);
+            SubjectEntity subject = session.find(SubjectEntity.class, subjectCode);
+            
+            if(course != null && subject != null){
+                if(course.getSubjects().contains(subject)){
+                    course.getSubjects().remove(subject);
+                    session.merge(course);
+                    transaction.commit();
+                    return true;
+                }
+            }
+            return false;
+        }catch(Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            throw e;
         } finally {
             if(session != null) {
                 session.close();

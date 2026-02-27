@@ -2,7 +2,9 @@ package edu.self.sams.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,7 +23,7 @@ public class CourseEntity {
             joinColumns = @JoinColumn(name="course_code"),
             inverseJoinColumns = @JoinColumn(name="subject_code")
     )
-    private Set<SubjectEntity> subjects = new HashSet<>();
+    private List<SubjectEntity> subjects = new ArrayList<>();
 
     public CourseEntity() {
     }
@@ -56,11 +58,11 @@ public class CourseEntity {
         this.duration = duration;
     }
 
-    public Set<SubjectEntity> getSubjects() {
+    public List<SubjectEntity> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Set<SubjectEntity> subjects) {
+    public void setSubjects(List<SubjectEntity> subjects) {
         this.subjects = subjects;
     }
 }

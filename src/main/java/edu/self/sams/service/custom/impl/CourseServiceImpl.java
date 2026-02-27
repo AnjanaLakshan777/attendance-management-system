@@ -53,4 +53,16 @@ public class CourseServiceImpl implements CourseService {
         }
         return null;
     }
+
+    @Override
+    public String assignSubject(String courseCode, String subjectCode) throws Exception {
+        boolean isAssigned = courseDao.assignSubject(courseCode, subjectCode);
+        return isAssigned ? "Subject Assigned to Course" : "Subject Not Assigned";
+    }
+
+    @Override
+    public String unassignSubject(String courseCode, String subjectCode) throws Exception {
+        boolean isUnassigned = courseDao.unassignSubject(courseCode, subjectCode);
+        return isUnassigned ? "Subject Unassigned from Course" : "Subject Not Unassigned";
+    }
 }

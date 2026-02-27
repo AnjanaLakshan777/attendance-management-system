@@ -104,5 +104,10 @@
             </Button>
          </children>
       </Pane>
+      <Button layoutX="245.0" layoutY="191.0" mnemonicParsing="false" onAction="#clickAssignCourses" prefHeight="34.0" prefWidth="127.0" style="-fx-font-weight: bold; -fx-background-color: #ab66e3;" text="Assign to Courses" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

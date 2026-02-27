@@ -2,6 +2,7 @@ package edu.self.sams.service.custom.impl;
 
 import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.SubjectDao;
+import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.service.custom.SubjectService;

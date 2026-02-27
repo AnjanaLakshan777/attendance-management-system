@@ -183,4 +183,9 @@ public class SubjectController implements Initializable {
         }
     }
 
+    public void clickAssignCourses(ActionEvent actionEvent) throws IOException {
+        AssignCoursesController.loadAssignCourses();
+        Stage preScene = (Stage)ancSubject.getScene().getWindow();
+        preScene.close();
+    }
 }

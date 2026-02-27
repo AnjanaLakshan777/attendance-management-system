@@ -2,8 +2,8 @@ package edu.self.sams.entity;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="subject")
@@ -15,7 +15,7 @@ public class SubjectEntity {
     private String subjectName;
 
     @ManyToMany(mappedBy="subjects")
-    private Set<CourseEntity> courses = new HashSet<>();
+    private List<CourseEntity> courses = new ArrayList<>();
 
     public SubjectEntity() {
     }
@@ -41,11 +41,11 @@ public class SubjectEntity {
         this.subjectName = subjectName;
     }
 
-    public Set<CourseEntity> getCourses() {
+    public List<CourseEntity> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<CourseEntity> courses) {
+    public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
 }

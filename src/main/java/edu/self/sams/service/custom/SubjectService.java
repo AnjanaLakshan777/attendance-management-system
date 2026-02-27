@@ -1,5 +1,6 @@
 package edu.self.sams.service.custom;
 
+import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.service.SuperService;
 
