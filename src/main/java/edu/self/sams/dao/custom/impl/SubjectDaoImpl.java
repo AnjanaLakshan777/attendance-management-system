@@ -108,4 +108,19 @@ public class SubjectDaoImpl implements SubjectDao {
             }
         }
     }
+
+    @Override
+    public SubjectEntity findSubjectWithCourses(String subjectCode) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<SubjectEntity> query = session.createQuery("FROM SubjectEntity s LEFT JOIN FETCH s.courses WHERE s.subjectCode = :subjectCode",SubjectEntity.class);
+            query.setParameter("subjectCode",subjectCode);
+            return query.uniqueResult();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
 }

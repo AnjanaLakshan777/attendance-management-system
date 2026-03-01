@@ -3,7 +3,9 @@ package edu.self.sams.service.custom.impl;
 import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.CourseDao;
 import edu.self.sams.dto.CourseDto;
+import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.entity.CourseEntity;
+import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.service.custom.CourseService;
 
 import java.util.ArrayList;
@@ -64,5 +66,19 @@ public class CourseServiceImpl implements CourseService {
     public String unassignSubject(String courseCode, String subjectCode) throws Exception {
         boolean isUnassigned = courseDao.unassignSubject(courseCode, subjectCode);
         return isUnassigned ? "Subject Unassigned from Course" : "Subject Not Unassigned";
+    }
+
+    @Override
+    public ArrayList<CourseSubjectDto> findSubjectsByCourseCode(String courseCode) throws Exception {
+        CourseEntity course = courseDao.findCourseWithSubjects(courseCode);
+        String courseName = course.getCourseName();
+        ArrayList<CourseSubjectDto> courseSubjectDtos = new ArrayList<>();
+        if(course != null){
+            for(SubjectEntity subject : course.getSubjects()){
+                CourseSubjectDto dto = new CourseSubjectDto(courseCode, courseName, subject.getSubjectCode(), subject.getSubjectName());
+                courseSubjectDtos.add(dto);
+            }
+        }
+        return courseSubjectDtos;
     }
 }

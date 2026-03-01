@@ -1,6 +1,7 @@
 package edu.self.sams.dao.custom.impl;
 
 import edu.self.sams.dao.custom.CourseDao;
+import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.entity.CourseEntity;
 import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.util.HibernateUtil;
@@ -166,6 +167,21 @@ public class CourseDaoImpl implements CourseDao {
                 transaction.rollback();
             }
             throw e;
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public CourseEntity findCourseWithSubjects(String courseCode) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<CourseEntity> query = session.createQuery("FROM CourseEntity c LEFT JOIN FETCH c.subjects WHERE c.courseCode = :courseCode", CourseEntity.class);
+            query.setParameter("courseCode", courseCode);
+            return query.uniqueResult();
         } finally {
             if(session != null) {
                 session.close();

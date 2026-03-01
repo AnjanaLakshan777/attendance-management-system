@@ -65,10 +65,45 @@ public class AssignCoursesController implements Initializable {
     }
 
     public void searchCourse(ActionEvent actionEvent) {
-        
+        String courseCode = comboCourse.getValue().toString().substring(0,4);
+        try{
+            ArrayList<CourseSubjectDto> courseSubjectDtos = courseService.findSubjectsByCourseCode(courseCode);
+
+            tblCourseSubject.getItems().clear();
+            
+            if(!courseSubjectDtos.isEmpty()){
+                for(CourseSubjectDto courseSubjectDto:courseSubjectDtos){
+                    tblCourseSubject.getItems().add(courseSubjectDto);
+                }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION,"No assigned subjects found for this course").show();
+            }
+        }catch(Exception e){
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Error loading subjects: " + e.getMessage()).show();
+        }
+        comboSubject.getSelectionModel().clearSelection();
     }
 
     public void searchSubject(ActionEvent actionEvent) {
+        String subjectCode = comboSubject.getValue().toString().substring(0,6);
+        try{
+            ArrayList<CourseSubjectDto> courseSubjectDtos = subjectService.findCoursesBySubjectCode(subjectCode);
+            tblCourseSubject.getItems().clear();
+            if(!courseSubjectDtos.isEmpty()){
+                for(CourseSubjectDto courseSubjectDto:courseSubjectDtos){
+                    tblCourseSubject.getItems().add(courseSubjectDto);
+                }
+            }else{
+                new Alert(Alert.AlertType.INFORMATION,"No assigned courses found for this subject").show();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Error loading subjects: " + e.getMessage()).show();
+        }
+        comboCourse.getSelectionModel().clearSelection();
     }
 
     public void clickAdd(ActionEvent actionEvent) {
@@ -119,6 +154,8 @@ public class AssignCoursesController implements Initializable {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+        comboCourse.getSelectionModel().clearSelection();
+        comboSubject.getSelectionModel().clearSelection();
     }
 
     public void clickUnassign(ActionEvent actionEvent) {

@@ -12,4 +12,5 @@ public interface SubjectService extends SuperService {
     public String deleteSubject(String subjectCode) throws Exception;
     public SubjectDto getSubject(String subjectCode) throws Exception;
     public ArrayList<SubjectDto> getSubjects() throws Exception;
+    public ArrayList<CourseSubjectDto> findCoursesBySubjectCode(String subjectCode) throws Exception;
 }

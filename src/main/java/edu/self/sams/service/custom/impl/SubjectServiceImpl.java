@@ -4,6 +4,7 @@ import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.SubjectDao;
 import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.dto.SubjectDto;
+import edu.self.sams.entity.CourseEntity;
 import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.service.custom.SubjectService;
 import java.util.ArrayList;
@@ -52,5 +53,18 @@ public class SubjectServiceImpl implements SubjectService {
             return subjectDtos;
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<CourseSubjectDto> findCoursesBySubjectCode(String subjectCode) throws Exception {
+        SubjectEntity subject = subjectDao.findSubjectWithCourses(subjectCode);
+        String subjectName = subject.getSubjectName();
+        ArrayList<CourseSubjectDto> courseSubjectDtos = new ArrayList<>();
+        if(subject != null){
+            for(CourseEntity courseEntity:subject.getCourses()){
+                courseSubjectDtos.add(new CourseSubjectDto(courseEntity.getCourseCode(),courseEntity.getCourseName(),subjectCode,subjectName));
+            }
+        }
+        return courseSubjectDtos;
     }
 }
