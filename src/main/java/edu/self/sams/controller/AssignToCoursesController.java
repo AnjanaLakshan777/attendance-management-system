@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class AssignCoursesController implements Initializable {
+public class AssignToCoursesController implements Initializable {
 
     @FXML
     private AnchorPane ancAssignCourses;
@@ -49,7 +49,7 @@ public class AssignCoursesController implements Initializable {
     private SubjectService subjectService = (SubjectService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SUBJECT);
 
     public static void loadAssignCourses() throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(AssignCoursesController.class.getResource("/view/AssignCourses.fxml"));
+        AnchorPane anchorPane = FXMLLoader.load(AssignToCoursesController.class.getResource("/view/AssignToCourses.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Assign Subjects to Courses");
         Scene scene = new Scene(anchorPane);
@@ -101,7 +101,7 @@ public class AssignCoursesController implements Initializable {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR,"Error loading subjects: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR,"Error loading courses: " + e.getMessage()).show();
         }
         comboCourse.getSelectionModel().clearSelection();
     }

@@ -26,12 +26,14 @@ public class ServiceFactory {
                 return new StudentServiceImpl();
             case LECTURER:
                 return new LecturerServiceImpl();
+            case ENROLLMENT:
+                return new EnrollmentServiceImpl();
             default:
                 return null;
         }
     }
 
     public enum ServiceType {
-        USER,COURSE,SUBJECT,STUDENT, LECTURER
+        USER,COURSE,SUBJECT,STUDENT, LECTURER, ENROLLMENT
     }
 }

@@ -205,4 +205,10 @@ public class StudentController implements Initializable {
             txtTeleNo.setText(selectedItem.getTeleNo());
         }
     }
+
+    public void clickEnrollToCourses(ActionEvent actionEvent) throws IOException {
+        EnrollToCoursesController.loadEnrollToCourses();
+        Stage preScene = (Stage)ancStudent.getScene().getWindow();
+        preScene.close();
+    }
 }

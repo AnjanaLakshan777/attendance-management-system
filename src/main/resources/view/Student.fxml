@@ -118,5 +118,10 @@
             </Button>
          </children>
       </Pane>
+      <Button layoutX="244.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickEnrollToCourses" prefHeight="34.0" prefWidth="127.0" style="-fx-font-weight: bold; -fx-background-color: #ab66e3;" text="Enroll to Courses" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

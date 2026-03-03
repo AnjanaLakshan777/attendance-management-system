@@ -48,4 +48,5 @@ public class SubjectEntity {
     public void setCourses(List<CourseEntity> courses) {
         this.courses = courses;
     }
+
 }

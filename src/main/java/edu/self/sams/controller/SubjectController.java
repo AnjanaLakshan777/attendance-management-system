@@ -1,6 +1,5 @@
 package edu.self.sams.controller;
 
-import edu.self.sams.dto.CourseDto;
 import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.service.ServiceFactory;
 import edu.self.sams.service.custom.SubjectService;
@@ -183,8 +182,8 @@ public class SubjectController implements Initializable {
         }
     }
 
-    public void clickAssignCourses(ActionEvent actionEvent) throws IOException {
-        AssignCoursesController.loadAssignCourses();
+    public void clickAssignToCourses(ActionEvent actionEvent) throws IOException {
+        AssignToCoursesController.loadAssignCourses();
         Stage preScene = (Stage)ancSubject.getScene().getWindow();
         preScene.close();
     }

@@ -1,9 +1,9 @@
 package edu.self.sams.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="student")
@@ -17,6 +17,9 @@ public class StudentEntity {
     private String email;
     @Column(name="tele_no", nullable=false, length=50)
     private String teleNo;
+
+    @OneToMany(mappedBy = "student")
+    private List<EnrollmentEntity> enrollments = new ArrayList<>();
 
     public StudentEntity() {
     }
@@ -57,5 +60,13 @@ public class StudentEntity {
 
     public void setTeleNo(String teleNo) {
         this.teleNo = teleNo;
+    }
+
+    public List<EnrollmentEntity> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<EnrollmentEntity> enrollments) {
+        this.enrollments = enrollments;
     }
 }

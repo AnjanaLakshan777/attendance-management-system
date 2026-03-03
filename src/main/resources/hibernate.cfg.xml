@@ -31,6 +31,8 @@
         <mapping class="edu.self.sams.entity.SubjectEntity"/>
         <mapping class="edu.self.sams.entity.StudentEntity"/>
         <mapping class="edu.self.sams.entity.LecturerEntity"/>
+        <mapping class="edu.self.sams.entity.EnrollmentEntity"/>
+        <mapping class="edu.self.sams.entity.EnrollmentId"/>
 
     </session-factory>
 </hibernate-configuration>

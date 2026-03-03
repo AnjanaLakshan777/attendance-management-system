@@ -3,9 +3,7 @@ package edu.self.sams.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name="course")
@@ -17,6 +15,8 @@ public class CourseEntity {
     private String courseName;
     @Column(name="duration", nullable=false, length=50)
     private String duration;
+
+    //Course and Subject
     @ManyToMany
     @JoinTable(
             name = "course_subject",
@@ -24,6 +24,10 @@ public class CourseEntity {
             inverseJoinColumns = @JoinColumn(name="subject_code")
     )
     private List<SubjectEntity> subjects = new ArrayList<>();
+
+    //Course and Enrollment(Student)
+    @OneToMany(mappedBy = "course")
+    private List<EnrollmentEntity> enrollments = new ArrayList<>();
 
     public CourseEntity() {
     }
@@ -64,5 +68,13 @@ public class CourseEntity {
 
     public void setSubjects(List<SubjectEntity> subjects) {
         this.subjects = subjects;
+    }
+
+    public List<EnrollmentEntity> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<EnrollmentEntity> enrollments) {
+        this.enrollments = enrollments;
     }
 }

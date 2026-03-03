@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ancAssignCourses" prefHeight="400.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.AssignCoursesController">
+<AnchorPane fx:id="ancAssignCourses" prefHeight="400.0" prefWidth="581.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.AssignToCoursesController">
    <children>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToSubject" style="-fx-background-color: #0d6cd9; -fx-font-weight: bold;" text="Back" textFill="WHITE" />
       <ComboBox fx:id="comboCourse" layoutX="104.0" layoutY="67.0" prefHeight="25.0" prefWidth="371.0" />
