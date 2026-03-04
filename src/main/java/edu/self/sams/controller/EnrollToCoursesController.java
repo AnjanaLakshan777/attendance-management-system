@@ -3,19 +3,22 @@ package edu.self.sams.controller;
 import edu.self.sams.dto.CourseDto;
 import edu.self.sams.dto.EnrollmentDto;
 import edu.self.sams.dto.StudentDto;
+import edu.self.sams.dto.TblEnrollmentDto;
 import edu.self.sams.entity.CourseEntity;
 import edu.self.sams.service.ServiceFactory;
 import edu.self.sams.service.custom.CourseService;
 import edu.self.sams.service.custom.EnrollmentService;
 import edu.self.sams.service.custom.StudentService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -35,6 +38,18 @@ public class EnrollToCoursesController implements Initializable {
     private ComboBox comboStatus;
     @FXML
     private AnchorPane ancEnrollToCourse;
+    @FXML
+    private TableView<TblEnrollmentDto> tblEnrollment;
+    @FXML
+    private TableColumn<TblEnrollmentDto, String> colRegNo;
+    @FXML
+    private TableColumn<TblEnrollmentDto, String> colStudentName;
+    @FXML
+    private TableColumn<TblEnrollmentDto, String> colCourseName;
+    @FXML
+    private TableColumn<TblEnrollmentDto, Integer> colBatch;
+    @FXML
+    private TableColumn<TblEnrollmentDto, String> colStatus;
 
     private CourseService courseService = (CourseService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.COURSE);
     private StudentService  studentService = (StudentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.STUDENT);
@@ -56,9 +71,25 @@ public class EnrollToCoursesController implements Initializable {
     }
 
     public void searchCourse(ActionEvent actionEvent) {
+        String courseCode = comboCourse.getValue().toString().substring(0,4);
+        try{
+            ArrayList<TblEnrollmentDto> tblEnrollmentDtos = enrollmentService.findEnrollmentsByCourseCode(courseCode);
+            ObservableList<TblEnrollmentDto> list = FXCollections.observableArrayList(tblEnrollmentDtos);
+            tblEnrollment.setItems(list);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void searchStudent(ActionEvent actionEvent) {
+        String regNo = comboStudent.getValue().toString().substring(0,5);
+        try{
+            ArrayList<TblEnrollmentDto> tblEnrollmentDtos = enrollmentService.findEnrollmentsByStudentRegNo(regNo);
+            ObservableList<TblEnrollmentDto> list = FXCollections.observableArrayList(tblEnrollmentDtos);
+            tblEnrollment.setItems(list);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void clickEnroll(ActionEvent actionEvent) {
@@ -72,6 +103,7 @@ public class EnrollToCoursesController implements Initializable {
         try{
             String resp = enrollmentService.enrollStudent(enrollmentDto);
             new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
+            loadTable();
         }catch(Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -83,6 +115,7 @@ public class EnrollToCoursesController implements Initializable {
         try{
             String resp = enrollmentService.deleteEnrollment(courseCode,regNo);
             new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
+            loadTable();
         }catch(Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
         }
@@ -90,6 +123,14 @@ public class EnrollToCoursesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colRegNo.setCellValueFactory(new PropertyValueFactory<>("regNo"));
+        colStudentName.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        colCourseName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        colBatch.setCellValueFactory(new PropertyValueFactory<>("batch"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        loadTable();
+
         try{
             ArrayList<CourseDto> courses = courseService.getCourses();
             if(courses != null){
@@ -119,8 +160,29 @@ public class EnrollToCoursesController implements Initializable {
         try{
             String resp = enrollmentService.updateEnrollment(enrollmentDto);
             new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
+            loadTable();
         }catch(Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).showAndWait();
+        }
+    }
+
+    private void loadTable(){
+        try{
+            ArrayList<TblEnrollmentDto> tblEnrollmentDtos = enrollmentService.getAllEnrollments();
+            ObservableList<TblEnrollmentDto> list = FXCollections.observableArrayList(tblEnrollmentDtos);
+            tblEnrollment.setItems(list);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void onTableClick(MouseEvent mouseEvent) {
+        TblEnrollmentDto selectedItem = tblEnrollment.getSelectionModel().getSelectedItem();
+        if(selectedItem != null){
+            comboCourse.getSelectionModel().select(selectedItem.getCourseCode()+"-"+selectedItem.getCourseName());
+            comboStudent.getSelectionModel().select(selectedItem.getRegNo()+"-"+selectedItem.getStudentName());
+            txtBatch.setText(String.valueOf(selectedItem.getBatch()));
+            comboStatus.getSelectionModel().select(selectedItem.getStatus());
         }
     }
 }

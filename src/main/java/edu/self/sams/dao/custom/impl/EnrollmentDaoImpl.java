@@ -1,10 +1,7 @@
 package edu.self.sams.dao.custom.impl;
 
 import edu.self.sams.dao.custom.EnrollmentDao;
-import edu.self.sams.entity.CourseEntity;
-import edu.self.sams.entity.EnrollmentEntity;
-import edu.self.sams.entity.EnrollmentId;
-import edu.self.sams.entity.StudentEntity;
+import edu.self.sams.entity.*;
 import edu.self.sams.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -114,11 +111,34 @@ public class EnrollmentDaoImpl implements EnrollmentDao {
 
     @Override
     public EnrollmentEntity get(EnrollmentId enrollmentId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public ArrayList<EnrollmentEntity> getAll() throws Exception {
+        return null;
+    }
+
+    @Override
+    public ArrayList<TblEnrollmentEntity> getAllEnrollments() throws Exception {
         Session session = null;
-        try {
+        try{
             session = HibernateUtil.getSessionFactory().openSession();
-            return session.find(EnrollmentEntity.class, enrollmentId);
-        } finally {
+            
+            String hql = "SELECT e.student.regNo, e.student.name, e.course.courseCode, e.course.courseName, e.batch, e.status " +
+                        "FROM EnrollmentEntity e " +
+                        "ORDER BY e.batch DESC, e.student.regNo";
+            
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+            ArrayList<Object[]> results = (ArrayList<Object[]>) query.getResultList();
+            
+            ArrayList<TblEnrollmentEntity> enrollmentList = new ArrayList<>();
+            for (Object[] row : results) {
+                TblEnrollmentEntity tblEnrollment = new TblEnrollmentEntity((String) row[0], (String) row[1], (String) row[2], (String) row[3], (Integer) row[4], (String) row[5]);
+                enrollmentList.add(tblEnrollment);
+            }
+            return enrollmentList;
+        }finally {
             if (session != null) {
                 session.close();
             }
@@ -126,7 +146,54 @@ public class EnrollmentDaoImpl implements EnrollmentDao {
     }
 
     @Override
-    public ArrayList<EnrollmentEntity> getAll() throws Exception {
-        return null;
+    public ArrayList<TblEnrollmentEntity> findEnrollmentsByCourseCode(String courseCode) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            String hql = "SELECT e.student.regNo, e.student.name, e.course.courseCode, e.course.courseName, e.batch, e.status " +
+                    "FROM EnrollmentEntity e " +
+                    "WHERE e.course.courseCode = :courseCode " +
+                    "ORDER BY e.batch DESC, e.student.regNo";
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+            query.setParameter("courseCode", courseCode);
+            ArrayList<Object[]> results = (ArrayList<Object[]>) query.getResultList();
+
+            ArrayList<TblEnrollmentEntity> enrollmentList = new ArrayList<>();
+            for (Object[] row : results) {
+                TblEnrollmentEntity tblEnrollment = new TblEnrollmentEntity((String) row[0], (String) row[1], (String) row[2], (String) row[3], (Integer) row[4], (String) row[5]);
+                enrollmentList.add(tblEnrollment);
+            }
+            return enrollmentList;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<TblEnrollmentEntity> findEnrollmentsByStudentRegNo(String studentRegNo) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            String hql = "SELECT e.student.regNo, e.student.name, e.course.courseCode, e.course.courseName, e.batch, e.status " +
+                    "FROM EnrollmentEntity e " +
+                    "WHERE e.student.regNo = :regNo " +
+                    "ORDER BY e.batch DESC, e.student.regNo";
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+            query.setParameter("regNo", studentRegNo);
+            ArrayList<Object[]> results = (ArrayList<Object[]>) query.getResultList();
+
+            ArrayList<TblEnrollmentEntity> enrollmentList = new ArrayList<>();
+            for (Object[] row : results) {
+                TblEnrollmentEntity tblEnrollment = new TblEnrollmentEntity((String) row[0], (String) row[1], (String) row[2], (String) row[3], (Integer) row[4], (String) row[5]);
+                enrollmentList.add(tblEnrollment);
+            }
+            return enrollmentList;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
+        }
     }
 }

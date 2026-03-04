@@ -5,10 +5,8 @@ import edu.self.sams.dao.custom.CourseDao;
 import edu.self.sams.dao.custom.EnrollmentDao;
 import edu.self.sams.dao.custom.StudentDao;
 import edu.self.sams.dto.EnrollmentDto;
-import edu.self.sams.entity.CourseEntity;
-import edu.self.sams.entity.EnrollmentEntity;
-import edu.self.sams.entity.EnrollmentId;
-import edu.self.sams.entity.StudentEntity;
+import edu.self.sams.dto.TblEnrollmentDto;
+import edu.self.sams.entity.*;
 import edu.self.sams.service.custom.EnrollmentService;
 
 import java.util.ArrayList;
@@ -75,6 +73,57 @@ public class EnrollmentServiceImpl implements EnrollmentService {
             return isDeleted ? "Enrollment deleted successfully" : "Enrollment not found";
         } catch (Exception e) {
             throw new Exception("Error deleting enrollment: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public ArrayList<TblEnrollmentDto> getAllEnrollments() throws Exception {
+        try{
+            ArrayList<TblEnrollmentEntity> enrollmentEntities = enrollmentDao.getAllEnrollments();
+            if(enrollmentEntities != null){
+                ArrayList<TblEnrollmentDto> enrollmentDtos = new ArrayList<>();
+                for(TblEnrollmentEntity enrollmentEntity : enrollmentEntities){
+                    enrollmentDtos.add(new TblEnrollmentDto(enrollmentEntity.getRegNo(),enrollmentEntity.getStudentName(),enrollmentEntity.getCourseCode(),enrollmentEntity.getCourseName(), enrollmentEntity.getBatch(),enrollmentEntity.getStatus()));
+                }
+                return enrollmentDtos;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<TblEnrollmentDto> findEnrollmentsByCourseCode(String courseCode) throws Exception {
+        try{
+            ArrayList<TblEnrollmentEntity> enrollmentEntities = enrollmentDao.findEnrollmentsByCourseCode(courseCode);
+            if(enrollmentEntities != null){
+                ArrayList<TblEnrollmentDto> enrollmentDtos = new ArrayList<>();
+                for(TblEnrollmentEntity enrollmentEntity : enrollmentEntities){
+                    enrollmentDtos.add(new TblEnrollmentDto(enrollmentEntity.getRegNo(),enrollmentEntity.getStudentName(),enrollmentEntity.getCourseCode(),enrollmentEntity.getCourseName(), enrollmentEntity.getBatch(),enrollmentEntity.getStatus()));
+                }
+                return enrollmentDtos;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public ArrayList<TblEnrollmentDto> findEnrollmentsByStudentRegNo(String studentRegNo) throws Exception {
+        try{
+            ArrayList<TblEnrollmentEntity> enrollmentEntities = enrollmentDao.findEnrollmentsByStudentRegNo(studentRegNo);
+            if(enrollmentEntities != null){
+                ArrayList<TblEnrollmentDto> enrollmentDtos = new ArrayList<>();
+                for(TblEnrollmentEntity enrollmentEntity : enrollmentEntities){
+                    enrollmentDtos.add(new TblEnrollmentDto(enrollmentEntity.getRegNo(),enrollmentEntity.getStudentName(),enrollmentEntity.getCourseCode(),enrollmentEntity.getCourseName(), enrollmentEntity.getBatch(),enrollmentEntity.getStatus()));
+                }
+                return enrollmentDtos;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
