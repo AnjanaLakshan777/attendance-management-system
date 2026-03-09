@@ -29,7 +29,19 @@ public class CourseEntity {
     @OneToMany(mappedBy = "course")
     private List<EnrollmentEntity> enrollments = new ArrayList<>();
 
+    //Course and Schedule class
+    @OneToMany(mappedBy = "course")
+    private List<ScheduleClassEntity> scheduleClasses = new ArrayList<>();
+
     public CourseEntity() {
+    }
+
+    public List<ScheduleClassEntity> getScheduleClasses() {
+        return scheduleClasses;
+    }
+
+    public void setScheduleClasses(ArrayList<ScheduleClassEntity> scheduleClasses) {
+        this.scheduleClasses = scheduleClasses;
     }
 
     public CourseEntity(String courseCode, String courseName, String duration) {

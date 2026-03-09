@@ -46,7 +46,7 @@ public class AdminDashboardController {
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException {
-        ScheduleClassController.loadScheduleClass();
+        ScheduleClassesController.loadScheduleClass();
         Stage preScene = (Stage)ancAdminDashboard.getScene().getWindow();
         preScene.close();
     }

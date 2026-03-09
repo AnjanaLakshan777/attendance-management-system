@@ -86,17 +86,17 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="652.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickOnSave" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
+      <Button layoutX="652.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickOnSave" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Save" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="545.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Update" textFill="WHITE">
+      <Button layoutX="545.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickOnUpdate" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Update" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button layoutX="438.0" layoutY="258.0" mnemonicParsing="false" onAction="#clickOnDelete" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
+      <Button layoutX="438.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickOnDelete" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: red;" text="Delete" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
@@ -125,5 +125,10 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Button layoutX="247.0" layoutY="264.0" mnemonicParsing="false" onAction="#clickAssignToSubjects" prefHeight="34.0" prefWidth="131.0" style="-fx-font-weight: bold; -fx-background-color: #ab66e3;" text="Assign to Subjects" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

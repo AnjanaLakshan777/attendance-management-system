@@ -78,7 +78,7 @@ public class CourseController implements Initializable {
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException {
-        ScheduleClassController.loadScheduleClass();
+        ScheduleClassesController.loadScheduleClass();
         Stage preScene = (Stage)ancCourse.getScene().getWindow();
         preScene.close();
     }

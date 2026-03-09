@@ -4,7 +4,9 @@ import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.SubjectDao;
 import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.dto.SubjectDto;
+import edu.self.sams.dto.SubjectLecturerDto;
 import edu.self.sams.entity.CourseEntity;
+import edu.self.sams.entity.LecturerEntity;
 import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.service.custom.SubjectService;
 import java.util.ArrayList;
@@ -66,5 +68,31 @@ public class SubjectServiceImpl implements SubjectService {
             }
         }
         return courseSubjectDtos;
+    }
+
+    @Override
+    public boolean assignLecturer(String subjectCode, String userId) throws Exception {
+        boolean isAssigned = subjectDao.assignLecturer(subjectCode, userId);
+        return isAssigned ? true : false;
+    }
+
+    @Override
+    public boolean unassignLecturer(String subjectCode, String userId) throws Exception {
+        boolean isUnassigned = subjectDao.unassignLecturer(subjectCode, userId);
+        return isUnassigned ? true : false;
+    }
+
+    @Override
+    public ArrayList<SubjectLecturerDto> findLecturersBySubjectCode(String subjectCode) throws Exception {
+        SubjectEntity subject = subjectDao.findSubjectWithLecturers(subjectCode);
+        String subjectName = subject.getSubjectName();
+        ArrayList<SubjectLecturerDto> subjectLecturerDtos = new ArrayList<>();
+        if(subject != null){
+            for(LecturerEntity lecturer : subject.getLecturers()){
+                SubjectLecturerDto dto = new SubjectLecturerDto(subjectCode, subjectName, lecturer.getUserId(), lecturer.getName());
+                subjectLecturerDtos.add(dto);
+            }
+        }
+        return subjectLecturerDtos;
     }
 }

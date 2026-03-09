@@ -1,7 +1,6 @@
 package edu.self.sams.controller;
 
 import edu.self.sams.dto.LecturerDto;
-import edu.self.sams.dto.StudentDto;
 import edu.self.sams.service.ServiceFactory;
 import edu.self.sams.service.custom.LecturerService;
 import javafx.collections.FXCollections;
@@ -83,7 +82,7 @@ public class LecturerController implements Initializable {
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException{
-        ScheduleClassController.loadScheduleClass();
+        ScheduleClassesController.loadScheduleClass();
         Stage preScene = (Stage)ancLecturer.getScene().getWindow();
         preScene.close();
     }
@@ -205,5 +204,11 @@ public class LecturerController implements Initializable {
             txtTeleNo.setText(lecturerDto.getTeleNo());
             txtPassword.setText(lecturerDto.getPassword());
         }
+    }
+
+    public void clickAssignToSubjects(ActionEvent actionEvent) throws IOException {
+        AssignToSubjectsController.loadAssignToSubjects();
+        Stage preScene = (Stage) ancLecturer.getScene().getWindow();
+        preScene.close();
     }
 }

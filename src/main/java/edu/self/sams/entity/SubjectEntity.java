@@ -14,8 +14,22 @@ public class SubjectEntity {
     @Column(name="subject_name", nullable=false, length=50)
     private String subjectName;
 
+    //Course and Subject
     @ManyToMany(mappedBy="subjects")
     private List<CourseEntity> courses = new ArrayList<>();
+
+    //Subject and Lecturer
+    @ManyToMany
+    @JoinTable(
+            name = "subject_lecturer",
+            joinColumns = @JoinColumn(name="subject_code"),
+            inverseJoinColumns = @JoinColumn(name="user_id")
+    )
+    private List<LecturerEntity> lecturers = new ArrayList<>();
+
+    //Subject and schedule class
+    @OneToMany(mappedBy = "subject")
+    private List<ScheduleClassEntity> scheduleClasses = new ArrayList<>();
 
     public SubjectEntity() {
     }
@@ -49,4 +63,19 @@ public class SubjectEntity {
         this.courses = courses;
     }
 
+    public List<LecturerEntity> getLecturers() {
+        return lecturers;
+    }
+
+    public List<ScheduleClassEntity> getScheduleClasses() {
+        return scheduleClasses;
+    }
+
+    public void setScheduleClasses(ArrayList<ScheduleClassEntity> scheduleClasses) {
+        this.scheduleClasses = scheduleClasses;
+    }
+
+    public void setLecturers(List<LecturerEntity> lecturers) {
+        this.lecturers = lecturers;
+    }
 }

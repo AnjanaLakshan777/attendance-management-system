@@ -3,7 +3,9 @@ package edu.self.sams.service.custom.impl;
 import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.LecturerDao;
 import edu.self.sams.dto.LecturerDto;
+import edu.self.sams.dto.SubjectLecturerDto;
 import edu.self.sams.entity.LecturerEntity;
+import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.entity.UserEntity;
 import edu.self.sams.service.custom.LecturerService;
 
@@ -47,7 +49,7 @@ public class LecturerServiceImpl implements LecturerService {
     }
 
     @Override
-    public List<LecturerDto> getLecturers() throws Exception {
+    public ArrayList<LecturerDto> getLecturers() throws Exception {
         ArrayList<LecturerEntity> lecturerEntities = lecturerDao.getAll();
         if(lecturerEntities!=null){
             ArrayList<LecturerDto> lecturerDtos = new ArrayList<>();
@@ -57,5 +59,18 @@ public class LecturerServiceImpl implements LecturerService {
             return lecturerDtos;
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<SubjectLecturerDto> findSubjectsByUserId(String userId) throws Exception {
+        LecturerEntity lecturer = lecturerDao.findLecturerWithSubjects(userId);
+        String lecturerName = lecturer.getName();
+        ArrayList<SubjectLecturerDto> subjectLecturerDtos = new ArrayList<>();
+        if(lecturer != null){
+            for(SubjectEntity subjectEntity:lecturer.getSubjects()){
+                subjectLecturerDtos.add(new SubjectLecturerDto(subjectEntity.getSubjectCode(),subjectEntity.getSubjectName(),userId,lecturerName));
+            }
+        }
+        return subjectLecturerDtos;
     }
 }

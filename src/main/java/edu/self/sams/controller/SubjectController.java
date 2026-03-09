@@ -75,7 +75,7 @@ public class SubjectController implements Initializable {
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException{
-        ScheduleClassController.loadScheduleClass();
+        ScheduleClassesController.loadScheduleClass();
         Stage preScene = (Stage)ancSubject.getScene().getWindow();
         preScene.close();
     }

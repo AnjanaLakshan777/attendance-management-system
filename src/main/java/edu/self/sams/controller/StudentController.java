@@ -1,7 +1,6 @@
 package edu.self.sams.controller;
 
 import edu.self.sams.dto.StudentDto;
-import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.service.ServiceFactory;
 import edu.self.sams.service.custom.StudentService;
 import javafx.collections.FXCollections;
@@ -84,7 +83,7 @@ public class StudentController implements Initializable {
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException{
-        ScheduleClassController.loadScheduleClass();
+        ScheduleClassesController.loadScheduleClass();
         Stage preScene = (Stage)ancStudent.getScene().getWindow();
         preScene.close();
 

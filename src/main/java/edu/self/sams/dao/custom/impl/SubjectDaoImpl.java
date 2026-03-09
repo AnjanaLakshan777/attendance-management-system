@@ -2,6 +2,7 @@ package edu.self.sams.dao.custom.impl;
 
 import edu.self.sams.dao.custom.SubjectDao;
 import edu.self.sams.entity.CourseEntity;
+import edu.self.sams.entity.LecturerEntity;
 import edu.self.sams.entity.SubjectEntity;
 import edu.self.sams.util.HibernateUtil;
 import org.hibernate.Session;
@@ -116,6 +117,85 @@ public class SubjectDaoImpl implements SubjectDao {
             session = HibernateUtil.getSessionFactory().openSession();
             Query<SubjectEntity> query = session.createQuery("FROM SubjectEntity s LEFT JOIN FETCH s.courses WHERE s.subjectCode = :subjectCode",SubjectEntity.class);
             query.setParameter("subjectCode",subjectCode);
+            return query.uniqueResult();
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public boolean assignLecturer(String subjectCode, String userId) throws Exception {
+        Session session = null;
+        Transaction transaction = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            SubjectEntity subject = session.find(SubjectEntity.class, subjectCode);
+            LecturerEntity lecturer = session.find(LecturerEntity.class, userId);
+
+            if(subject != null && lecturer != null){
+                if(!subject.getLecturers().contains(lecturer)){
+                    subject.getLecturers().add(lecturer);
+                    session.merge(subject);
+                    transaction.commit();
+                    return true;
+                }
+            }
+            return false;
+        }catch(Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            throw e;
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public boolean unassignLecturer(String subjectCode, String userId) throws Exception {
+        Session session = null;
+        Transaction transaction = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            SubjectEntity subject = session.find(SubjectEntity.class, subjectCode);
+            LecturerEntity lecturer = session.find(LecturerEntity.class, userId);
+
+            if(subject != null && lecturer != null){
+                if(subject.getLecturers().contains(lecturer)){
+                    subject.getLecturers().remove(lecturer);
+                    session.merge(subject);
+                    transaction.commit();
+                    return true;
+                }
+            }
+            return false;
+        }catch(Exception e){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            throw e;
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public SubjectEntity findSubjectWithLecturers(String subjectCode) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<SubjectEntity> query = session.createQuery("FROM SubjectEntity s LEFT JOIN FETCH s.lecturers WHERE s.subjectCode = :subjectCode", SubjectEntity.class);
+            query.setParameter("subjectCode", subjectCode);
             return query.uniqueResult();
         } finally {
             if(session != null) {

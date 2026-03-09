@@ -2,6 +2,7 @@ package edu.self.sams.service.custom;
 
 import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.dto.SubjectDto;
+import edu.self.sams.dto.SubjectLecturerDto;
 import edu.self.sams.service.SuperService;
 
 import java.util.ArrayList;
@@ -13,4 +14,8 @@ public interface SubjectService extends SuperService {
     public SubjectDto getSubject(String subjectCode) throws Exception;
     public ArrayList<SubjectDto> getSubjects() throws Exception;
     public ArrayList<CourseSubjectDto> findCoursesBySubjectCode(String subjectCode) throws Exception;
+
+    public boolean assignLecturer(String subjectCode, String userId) throws Exception;
+    public boolean unassignLecturer(String subjectCode, String userId) throws Exception;
+    public ArrayList<SubjectLecturerDto> findLecturersBySubjectCode(String subjectCode) throws Exception;
 }

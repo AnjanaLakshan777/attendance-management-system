@@ -2,6 +2,9 @@ package edu.self.sams.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="lecturer")
 public class LecturerEntity {
@@ -15,12 +18,29 @@ public class LecturerEntity {
     @Column(name="tele_no", nullable=false, length=50)
     private String teleNo;
 
+    // Lecturer and User
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name="user_id")
     private UserEntity userEntity;
 
+    // Lecturer and Subjects
+    @ManyToMany(mappedBy = "lecturers")
+    private List<SubjectEntity> subjects = new ArrayList<>();
+
+    // Lecturer and Schedule class
+    @OneToMany(mappedBy = "lecturer")
+    private List<ScheduleClassEntity> scheduleClasses = new ArrayList<>();
+
     public LecturerEntity() {
+    }
+
+    public List<ScheduleClassEntity> getScheduleClasses() {
+        return scheduleClasses;
+    }
+
+    public void setScheduleClasses(ArrayList<ScheduleClassEntity> scheduleClasses) {
+        this.scheduleClasses = scheduleClasses;
     }
 
     public LecturerEntity(String userId, String name, String email, String teleNo, UserEntity userEntity) {
@@ -69,5 +89,13 @@ public class LecturerEntity {
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
+    }
+
+    public List<SubjectEntity> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<SubjectEntity> subjects) {
+        this.subjects = subjects;
     }
 }

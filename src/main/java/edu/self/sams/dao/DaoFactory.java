@@ -29,12 +29,14 @@ public class DaoFactory {
                 return new LecturerDaoImpl();
             case ENROLLMENT:
                 return new EnrollmentDaoImpl();
+            case SCHEDULECLASS:
+                return new ScheduleClassDaoImpl();
             default:
                 return null;
         }
     }
 
     public enum daoType{
-        USER, COURSE, SUBJECT, STUDENT, LECTURER, ENROLLMENT
+        USER, COURSE, SUBJECT, STUDENT, LECTURER, ENROLLMENT, SCHEDULECLASS
     }
 }

@@ -106,4 +106,19 @@ public class LecturerDaoImpl implements LecturerDao {
             }
         }
     }
+
+    @Override
+    public LecturerEntity findLecturerWithSubjects(String userId) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Query<LecturerEntity> query = session.createQuery("FROM LecturerEntity l LEFT JOIN FETCH l.subjects WHERE l.userId = :userId", LecturerEntity.class);
+            query.setParameter("userId", userId);
+            return query.uniqueResult();
+        } finally {
+            if(session!=null){
+                session.close();
+            }
+        }
+    }
 }

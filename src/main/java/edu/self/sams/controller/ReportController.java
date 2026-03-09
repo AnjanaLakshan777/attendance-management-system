@@ -52,7 +52,7 @@ public class ReportController {
     }
 
     public void goToScheduleClass(ActionEvent actionEvent) throws IOException{
-        ScheduleClassController.loadScheduleClass();
+        ScheduleClassesController.loadScheduleClass();
         Stage preScene = (Stage)ancReport.getScene().getWindow();
         preScene.close();
     }
