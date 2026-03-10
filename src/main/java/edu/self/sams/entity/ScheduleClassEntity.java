@@ -15,6 +15,10 @@ public class ScheduleClassEntity {
     private String startTime;
     @Column(name="end_time",nullable = false,length = 50)
     private String endTime;
+    @Column(name="batch",nullable = false,length = 50)
+    private int batch;
+    @Column(name="status",nullable = false,length = 50)
+    private String status;
 
     @ManyToOne
     private CourseEntity course;
@@ -26,11 +30,13 @@ public class ScheduleClassEntity {
     public ScheduleClassEntity() {
     }
 
-    public ScheduleClassEntity(String classId, String date, String startTime, String endTime, CourseEntity course, SubjectEntity subject, LecturerEntity lecturer) {
+    public ScheduleClassEntity(String classId, String date, String startTime, String endTime, int batch, String status, CourseEntity course, SubjectEntity subject, LecturerEntity lecturer) {
         this.classId = classId;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.batch = batch;
+        this.status = status;
         this.course = course;
         this.subject = subject;
         this.lecturer = lecturer;
@@ -66,6 +72,22 @@ public class ScheduleClassEntity {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public int getBatch() {
+        return batch;
+    }
+
+    public void setBatch(int batch) {
+        this.batch = batch;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public CourseEntity getCourse() {

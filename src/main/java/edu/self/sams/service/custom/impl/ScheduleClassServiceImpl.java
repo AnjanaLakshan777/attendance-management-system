@@ -28,7 +28,7 @@ public class ScheduleClassServiceImpl implements ScheduleClassService {
         SubjectEntity subject = subjectDao.get(scheduleClassDto.getSubjectCode());
         LecturerEntity lecturer = lecturerDao.get(scheduleClassDto.getUserId());
 
-        ScheduleClassEntity scheduleClassEntity = new ScheduleClassEntity(generateNextClassId(),scheduleClassDto.getDate(),scheduleClassDto.getStartTime(),scheduleClassDto.getEndTime(),course,subject,lecturer);
+        ScheduleClassEntity scheduleClassEntity = new ScheduleClassEntity(generateNextClassId(),scheduleClassDto.getDate(),scheduleClassDto.getStartTime(),scheduleClassDto.getEndTime(),scheduleClassDto.getBatch(),scheduleClassDto.getStatus(),course,subject,lecturer);
         boolean isSaved =  scheduleClassDao.save(scheduleClassEntity);
         return isSaved ? "Class Schedule Successfully" : "Class Schedule Fail";
     }
@@ -40,7 +40,7 @@ public class ScheduleClassServiceImpl implements ScheduleClassService {
         SubjectEntity subject = subjectDao.get(scheduleClassDto.getSubjectCode());
         LecturerEntity lecturer = lecturerDao.get(scheduleClassDto.getUserId());
 
-        ScheduleClassEntity scheduleClassEntity = new ScheduleClassEntity(scheduleClassDto.getClassId(),scheduleClassDto.getDate(),scheduleClassDto.getStartTime(),scheduleClassDto.getEndTime(),course,subject,lecturer);
+        ScheduleClassEntity scheduleClassEntity = new ScheduleClassEntity(scheduleClassDto.getClassId(),scheduleClassDto.getDate(),scheduleClassDto.getStartTime(),scheduleClassDto.getEndTime(),scheduleClassDto.getBatch(),scheduleClassDto.getStatus(),course,subject,lecturer);
         boolean isUpdated =  scheduleClassDao.update(scheduleClassEntity);
         return isUpdated ? "Class Schedule Update Successfully" : "Class Schedule Update Fail";
     }
@@ -57,7 +57,7 @@ public class ScheduleClassServiceImpl implements ScheduleClassService {
         if(scheduleClassEntities!=null){
             ArrayList<ScheduleClassDto> scheduleClassDtos = new ArrayList<>();
             for(ScheduleClassEntity scheduleClassEntity:scheduleClassEntities){
-                scheduleClassDtos.add(new ScheduleClassDto(scheduleClassEntity.getClassId(),scheduleClassEntity.getCourse().getCourseCode(),scheduleClassEntity.getSubject().getSubjectCode(),scheduleClassEntity.getLecturer().getUserId(),scheduleClassEntity.getDate(),scheduleClassEntity.getStartTime(),scheduleClassEntity.getEndTime()));
+                scheduleClassDtos.add(new ScheduleClassDto(scheduleClassEntity.getClassId(),scheduleClassEntity.getCourse().getCourseCode(),scheduleClassEntity.getSubject().getSubjectCode(),scheduleClassEntity.getLecturer().getUserId(),scheduleClassEntity.getDate(),scheduleClassEntity.getStartTime(),scheduleClassEntity.getEndTime(),scheduleClassEntity.getBatch(),scheduleClassEntity.getStatus()));
             }
             return scheduleClassDtos;
         }

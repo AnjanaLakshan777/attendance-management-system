@@ -47,6 +47,8 @@ public class ScheduleClassesController implements Initializable {
     @FXML
     private TextField txtEndTime;
     @FXML
+    private TextField txtBatch;
+    @FXML
     private TableView<ScheduleClassDto> tblScheduleClass;
     @FXML
     private TableColumn<ScheduleClassDto,String> colClassId;
@@ -62,6 +64,8 @@ public class ScheduleClassesController implements Initializable {
     private TableColumn<ScheduleClassDto,String> colStartTime;
     @FXML
     private TableColumn<ScheduleClassDto,String> colEndTime;
+    @FXML
+    private TableColumn<ScheduleClassDto,Integer> colBatch;
 
     private CourseService courseService = (CourseService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.COURSE);
     private SubjectService subjectService = (SubjectService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SUBJECT);
@@ -127,12 +131,14 @@ public class ScheduleClassesController implements Initializable {
         String date = txtDate.getText().toString().trim();
         String startTime = txtStartTime.getText().toString().trim();
         String endTime = txtEndTime.getText().toString().trim();
+        int batch = Integer.parseInt(txtBatch.getText());
+
 
         boolean isDateTimeValid = dateTimeValidation(date,startTime,endTime);
 
         if(isDateTimeValid){
             try{
-                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(null,courseCode,subjectCode,userId,date,startTime,endTime);
+                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(null,courseCode,subjectCode,userId,date,startTime,endTime,batch,"scheduled");
                 String resp = scheduleClassService.saveScheduleClass(scheduleClassDto);
                 new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
                 loadTable();
@@ -153,12 +159,13 @@ public class ScheduleClassesController implements Initializable {
         String date = txtDate.getText().toString().trim();
         String startTime = txtStartTime.getText().toString().trim();
         String endTime = txtEndTime.getText().toString().trim();
+        int batch = Integer.parseInt(txtBatch.getText());
 
         boolean isDateTimeValid = dateTimeValidation(date,startTime,endTime);
 
         if(isDateTimeValid){
             try{
-                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(classId,courseCode,subjectCode,userId,date,startTime,endTime);
+                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(classId,courseCode,subjectCode,userId,date,startTime,endTime,batch,"scheduled");
                 String resp = scheduleClassService.updateScheduleClass(scheduleClassDto);
                 new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
                 loadTable();
@@ -193,6 +200,7 @@ public class ScheduleClassesController implements Initializable {
             txtDate.setText(selectedItem.getDate());
             txtStartTime.setText(selectedItem.getStartTime());
             txtEndTime.setText(selectedItem.getEndTime());
+            txtBatch.setText(String.valueOf(selectedItem.getBatch()));
         }
     }
 
@@ -205,6 +213,7 @@ public class ScheduleClassesController implements Initializable {
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
+        colBatch.setCellValueFactory(new PropertyValueFactory<>("batch"));
 
         try{
             ArrayList<CourseDto> courses = courseService.getCourses();
@@ -252,8 +261,8 @@ public class ScheduleClassesController implements Initializable {
 
     private boolean dateTimeValidation(String date,String startTime,String endTime){
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT);
-        DateTimeFormatter startTimeFormatter = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
-        DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter startTimeFormatter = DateTimeFormatter.ofPattern("HH.mm").withResolverStyle(ResolverStyle.STRICT);
+        DateTimeFormatter endTimeFormatter = DateTimeFormatter.ofPattern("HH.mm").withResolverStyle(ResolverStyle.STRICT);
         try{
             LocalDate.parse(date, dateFormatter);
             LocalTime.parse(startTime, startTimeFormatter);
@@ -282,5 +291,6 @@ public class ScheduleClassesController implements Initializable {
         txtDate.clear();
         txtStartTime.clear();
         txtEndTime.clear();
+        txtBatch.clear();
     }
 }
