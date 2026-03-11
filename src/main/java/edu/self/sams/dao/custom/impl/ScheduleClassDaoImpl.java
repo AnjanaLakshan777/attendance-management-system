@@ -122,4 +122,34 @@ public class ScheduleClassDaoImpl implements ScheduleClassDao {
         session.close();
         return lastId;
     }
+
+    @Override
+    public ArrayList<ScheduleClassEntity> getScheduleClassByUserId(String userId) {
+        Session session = null;
+
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = "FROM ScheduleClassEntity s " +
+                    "JOIN FETCH s.course " +
+                    "JOIN FETCH s.subject " +
+                    "JOIN FETCH s.lecturer l " +
+                    "WHERE l.userId = :userId " +
+                    "AND s.status = :status ";
+
+            Query<ScheduleClassEntity> query = session.createQuery(hql, ScheduleClassEntity.class);
+            query.setParameter("userId", userId);
+            query.setParameter("status", "scheduled");
+            ArrayList<ScheduleClassEntity> scheduleClassList = (ArrayList)query.getResultList();
+
+            return scheduleClassList;
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

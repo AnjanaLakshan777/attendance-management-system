@@ -10,4 +10,5 @@ public interface ScheduleClassService extends SuperService {
     public String updateScheduleClass(ScheduleClassDto scheduleClassDto) throws Exception;
     public String deleteScheduleClass(String classId) throws Exception;
     public ArrayList<ScheduleClassDto> getAllScheduleClass() throws Exception;
+    public ArrayList<ScheduleClassDto> getScheduleClassByUserId(String userId) throws Exception;
 }

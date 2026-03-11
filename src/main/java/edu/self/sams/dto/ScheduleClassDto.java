@@ -3,7 +3,9 @@ package edu.self.sams.dto;
 public class ScheduleClassDto {
     private String classId;
     private String courseCode;
+    private String courseName;
     private String subjectCode;
+    private String subjectName;
     private String userId;
     private String date;
     private String startTime;
@@ -14,10 +16,12 @@ public class ScheduleClassDto {
     public ScheduleClassDto() {
     }
 
-    public ScheduleClassDto(String classId, String courseCode, String subjectCode, String userId, String date, String startTime, String endTime, int batch,  String status) {
+    public ScheduleClassDto(String classId, String courseCode, String courseName, String subjectCode, String subjectName, String userId, String date, String startTime, String endTime, int batch, String status) {
         this.classId = classId;
         this.courseCode = courseCode;
+        this.courseName = courseName;
         this.subjectCode = subjectCode;
+        this.subjectName = subjectName;
         this.userId = userId;
         this.date = date;
         this.startTime = startTime;
@@ -42,12 +46,28 @@ public class ScheduleClassDto {
         this.courseCode = courseCode;
     }
 
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
     public String getSubjectCode() {
         return subjectCode;
     }
 
     public void setSubjectCode(String subjectCode) {
         this.subjectCode = subjectCode;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
     public String getUserId() {

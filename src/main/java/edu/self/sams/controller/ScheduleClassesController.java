@@ -126,7 +126,9 @@ public class ScheduleClassesController implements Initializable {
 
     public void clickSave(ActionEvent actionEvent) {
         String courseCode = comboCourse.getValue().toString().substring(0,4);
+        String courseName = comboCourse.getValue().toString().substring(5).trim();
         String subjectCode = comboSubject.getValue().toString().substring(0,6);
+        String subjectName = comboSubject.getValue().toString().substring(7).trim();
         String userId = comboLecturer.getValue().toString().substring(0,4);
         String date = txtDate.getText().toString().trim();
         String startTime = txtStartTime.getText().toString().trim();
@@ -138,7 +140,7 @@ public class ScheduleClassesController implements Initializable {
 
         if(isDateTimeValid){
             try{
-                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(null,courseCode,subjectCode,userId,date,startTime,endTime,batch,"scheduled");
+                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(null,courseCode,courseName,subjectCode,subjectName,userId,date,startTime,endTime,batch,"scheduled");
                 String resp = scheduleClassService.saveScheduleClass(scheduleClassDto);
                 new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
                 loadTable();
@@ -154,7 +156,9 @@ public class ScheduleClassesController implements Initializable {
     public void clickUpdate(ActionEvent actionEvent) {
         String classId = lblClassId.getText().toString();
         String courseCode = comboCourse.getValue().toString().substring(0,4);
+        String courseName = comboCourse.getValue().toString().substring(5).trim();
         String subjectCode = comboSubject.getValue().toString().substring(0,6);
+        String subjectName = comboSubject.getValue().toString().substring(7).trim();
         String userId = comboLecturer.getValue().toString().substring(0,4);
         String date = txtDate.getText().toString().trim();
         String startTime = txtStartTime.getText().toString().trim();
@@ -165,7 +169,7 @@ public class ScheduleClassesController implements Initializable {
 
         if(isDateTimeValid){
             try{
-                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(classId,courseCode,subjectCode,userId,date,startTime,endTime,batch,"scheduled");
+                ScheduleClassDto scheduleClassDto = new ScheduleClassDto(classId,courseCode,courseName,subjectCode,subjectName,userId,date,startTime,endTime,batch,"scheduled");
                 String resp = scheduleClassService.updateScheduleClass(scheduleClassDto);
                 new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
                 loadTable();

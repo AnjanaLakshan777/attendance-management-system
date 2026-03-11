@@ -59,7 +59,11 @@ public class LoginController {
             }
         } else if (role.equals("Lecturer")) {
             if(userService.userLogin(userId,password,role)){
-                AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/LecturerDashboard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LecturerDashboard.fxml"));
+                AnchorPane anchorPane = loader.load();
+                LectureDashboardController controller = loader.getController();
+                controller.setUserId(userId);
+                
                 Stage stage = new Stage();
                 stage.setTitle("Lecture Dashboard");
                 Scene scene = new Scene(anchorPane);

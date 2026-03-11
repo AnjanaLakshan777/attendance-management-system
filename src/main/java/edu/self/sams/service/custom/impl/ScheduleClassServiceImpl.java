@@ -6,10 +6,7 @@ import edu.self.sams.dao.custom.LecturerDao;
 import edu.self.sams.dao.custom.ScheduleClassDao;
 import edu.self.sams.dao.custom.SubjectDao;
 import edu.self.sams.dto.ScheduleClassDto;
-import edu.self.sams.entity.CourseEntity;
-import edu.self.sams.entity.LecturerEntity;
-import edu.self.sams.entity.ScheduleClassEntity;
-import edu.self.sams.entity.SubjectEntity;
+import edu.self.sams.entity.*;
 import edu.self.sams.service.custom.ScheduleClassService;
 
 import java.util.ArrayList;
@@ -57,7 +54,20 @@ public class ScheduleClassServiceImpl implements ScheduleClassService {
         if(scheduleClassEntities!=null){
             ArrayList<ScheduleClassDto> scheduleClassDtos = new ArrayList<>();
             for(ScheduleClassEntity scheduleClassEntity:scheduleClassEntities){
-                scheduleClassDtos.add(new ScheduleClassDto(scheduleClassEntity.getClassId(),scheduleClassEntity.getCourse().getCourseCode(),scheduleClassEntity.getSubject().getSubjectCode(),scheduleClassEntity.getLecturer().getUserId(),scheduleClassEntity.getDate(),scheduleClassEntity.getStartTime(),scheduleClassEntity.getEndTime(),scheduleClassEntity.getBatch(),scheduleClassEntity.getStatus()));
+                scheduleClassDtos.add(new ScheduleClassDto(scheduleClassEntity.getClassId(),scheduleClassEntity.getCourse().getCourseCode(),scheduleClassEntity.getCourse().getCourseName(),scheduleClassEntity.getSubject().getSubjectCode(),scheduleClassEntity.getSubject().getSubjectName(),scheduleClassEntity.getLecturer().getUserId(),scheduleClassEntity.getDate(),scheduleClassEntity.getStartTime(),scheduleClassEntity.getEndTime(),scheduleClassEntity.getBatch(),scheduleClassEntity.getStatus()));
+            }
+            return scheduleClassDtos;
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<ScheduleClassDto> getScheduleClassByUserId(String userId) throws Exception {
+        ArrayList<ScheduleClassEntity> scheduleClassEntities = scheduleClassDao.getScheduleClassByUserId(userId);
+        if(scheduleClassEntities!=null){
+            ArrayList<ScheduleClassDto> scheduleClassDtos = new ArrayList<>();
+            for(ScheduleClassEntity scheduleClassEntity:scheduleClassEntities){
+                scheduleClassDtos.add(new ScheduleClassDto(scheduleClassEntity.getClassId(),scheduleClassEntity.getCourse().getCourseCode(),scheduleClassEntity.getCourse().getCourseName(),scheduleClassEntity.getSubject().getSubjectCode(),scheduleClassEntity.getSubject().getSubjectName(),scheduleClassEntity.getLecturer().getUserId(),scheduleClassEntity.getDate(),scheduleClassEntity.getStartTime(),scheduleClassEntity.getEndTime(),scheduleClassEntity.getBatch(),scheduleClassEntity.getStatus()));
             }
             return scheduleClassDtos;
         }
