@@ -61,7 +61,7 @@ public class LoginController {
             if(userService.userLogin(userId,password,role)){
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LecturerDashboard.fxml"));
                 AnchorPane anchorPane = loader.load();
-                LectureDashboardController controller = loader.getController();
+                LecturerDashboardController controller = loader.getController();
                 controller.setUserId(userId);
                 
                 Stage stage = new Stage();

@@ -2,6 +2,9 @@ package edu.self.sams.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name="schedule_class")
@@ -26,6 +29,9 @@ public class ScheduleClassEntity {
     private SubjectEntity subject;
     @ManyToOne
     private LecturerEntity lecturer;
+
+    @OneToMany(mappedBy = "scheduleClass")
+    private List<AttendanceEntity> attendances = new ArrayList<>();
 
     public ScheduleClassEntity() {
     }
@@ -112,5 +118,13 @@ public class ScheduleClassEntity {
 
     public void setLecturer(LecturerEntity lecturer) {
         this.lecturer = lecturer;
+    }
+
+    public List<AttendanceEntity> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<AttendanceEntity> attendances) {
+        this.attendances = attendances;
     }
 }

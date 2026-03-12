@@ -106,4 +106,23 @@ public class StudentDaoImpl implements StudentDao {
             }
         }
     }
+
+    @Override
+    public ArrayList<StudentEntity> getStudentsByCourseAndBatch(String courseCode, int batch) throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            String hql = "SELECT DISTINCT e.student FROM EnrollmentEntity e " +
+                         "WHERE e.course.courseCode = :courseCode AND e.batch = :batch AND e.status = :status ";
+            Query<StudentEntity> query = session.createQuery(hql, StudentEntity.class);
+            query.setParameter("courseCode", courseCode);
+            query.setParameter("batch", batch);
+            query.setParameter("status", "Active");
+            return new ArrayList<>(query.list());
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
 }

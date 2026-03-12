@@ -5,6 +5,8 @@ public class StudentDto {
     private String name;
     private String email;
     private String teleNo;
+    private String status;
+    private String remark;
 
     public StudentDto() {
     }
@@ -46,5 +48,21 @@ public class StudentDto {
 
     public void setTeleNo(String teleNo) {
         this.teleNo = teleNo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

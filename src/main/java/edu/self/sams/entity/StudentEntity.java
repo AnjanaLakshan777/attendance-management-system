@@ -21,6 +21,9 @@ public class StudentEntity {
     @OneToMany(mappedBy = "student")
     private List<EnrollmentEntity> enrollments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student")
+    private List<AttendanceEntity> attendances = new ArrayList<>();
+
     public StudentEntity() {
     }
     public StudentEntity(String regNo, String name, String email, String teleNo) {
@@ -68,5 +71,13 @@ public class StudentEntity {
 
     public void setEnrollments(List<EnrollmentEntity> enrollments) {
         this.enrollments = enrollments;
+    }
+
+    public List<AttendanceEntity> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(List<AttendanceEntity> attendances) {
+        this.attendances = attendances;
     }
 }

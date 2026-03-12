@@ -66,6 +66,8 @@ public class ScheduleClassesController implements Initializable {
     private TableColumn<ScheduleClassDto,String> colEndTime;
     @FXML
     private TableColumn<ScheduleClassDto,Integer> colBatch;
+    @FXML
+    private TableColumn<ScheduleClassDto,String> colStatus;
 
     private CourseService courseService = (CourseService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.COURSE);
     private SubjectService subjectService = (SubjectService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SUBJECT);
@@ -218,6 +220,7 @@ public class ScheduleClassesController implements Initializable {
         colStartTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         colEndTime.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         colBatch.setCellValueFactory(new PropertyValueFactory<>("batch"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         try{
             ArrayList<CourseDto> courses = courseService.getCourses();

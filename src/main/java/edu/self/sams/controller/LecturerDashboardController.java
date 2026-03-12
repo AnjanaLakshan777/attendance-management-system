@@ -9,7 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,7 +25,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class LectureDashboardController implements Initializable {
+public class LecturerDashboardController implements Initializable {
     @FXML
     private AnchorPane ancLecturerDash;
     @FXML
@@ -61,12 +64,35 @@ public class LectureDashboardController implements Initializable {
         preScene.close();
     }
 
-    public void clickOnMarkAttendance(ActionEvent actionEvent) {
+    public void clickOnMarkAttendance(ActionEvent actionEvent) throws IOException {
+        ScheduleClassDto selectedItem = tblScheduleClass.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AttendanceMark.fxml"));
+            AnchorPane anchorPane = loader.load();
+            AttendanceMarkController controller = loader.getController();
+            controller.setScheduleClass(selectedItem);
 
+            Stage stage = new Stage();
+            stage.setTitle("Attendance Mark");
+            Scene scene = new Scene(anchorPane);
+            stage.setScene(scene);
+            stage.show();
+
+            Stage preScene =  (Stage) ancLecturerDash.getScene().getWindow();
+            preScene.close();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Please select a scheduled class").showAndWait();
+        }
     }
 
-    public void clickOnDone(ActionEvent actionEvent) {
-
+    public void clickOnDone(ActionEvent actionEvent) throws Exception {
+        ScheduleClassDto selectedItem = tblScheduleClass.getSelectionModel().getSelectedItem();
+        if(selectedItem!=null){
+            selectedItem.setStatus("done");
+            String resp = scheduleClassService.updateScheduleClass(selectedItem);
+            new Alert(Alert.AlertType.INFORMATION,resp).showAndWait();
+            loadTable(userId);
+        }
     }
 
     @Override
@@ -81,8 +107,8 @@ public class LectureDashboardController implements Initializable {
 
     private void loadTable(String userId) {
         try{
-            ArrayList<ScheduleClassDto> ScheduleClassDtos = scheduleClassService.getScheduleClassByUserId(userId);
-            ObservableList<ScheduleClassDto> list = FXCollections.observableArrayList(ScheduleClassDtos);
+            ArrayList<ScheduleClassDto> scheduleClassDtos = scheduleClassService.getScheduleClassByUserId(userId);
+            ObservableList<ScheduleClassDto> list = FXCollections.observableArrayList(scheduleClassDtos);
             tblScheduleClass.setItems(list);
         } catch (Exception e) {
             throw new RuntimeException(e);

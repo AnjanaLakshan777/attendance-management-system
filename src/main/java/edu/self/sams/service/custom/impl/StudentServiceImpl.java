@@ -54,4 +54,17 @@ public class StudentServiceImpl implements StudentService {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<StudentDto> getStudentsByCourseAndBatch(String course, int batch) throws Exception {
+        ArrayList<StudentEntity>  studentEntities = studentDao.getStudentsByCourseAndBatch(course, batch);
+        if(studentEntities != null){
+            ArrayList<StudentDto> studentDtos = new ArrayList<>();
+            for(StudentEntity studentEntity : studentEntities){
+                studentDtos.add(new StudentDto(studentEntity.getRegNo(),studentEntity.getName(),studentEntity.getEmail(),studentEntity.getTeleNo()));
+            }
+            return studentDtos;
+        }
+        return null;
+    }
 }
