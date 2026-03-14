@@ -12,4 +12,7 @@ public interface AttendanceService extends SuperService {
     String deleteAttendance(String classId, String regNo) throws Exception;
     AttendanceDto getAttendance(String classId, String regNo) throws Exception;
     ArrayList<AttendanceDto> getAllAttendance() throws Exception;
+
+    ArrayList<AttendanceDto> getAttendanceByClassId(String classId) throws Exception;
+    ArrayList<AttendanceDto> getAttendanceList(String courseCode, String subjectCode, int batch, String date );
 }

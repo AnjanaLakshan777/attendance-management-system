@@ -5,6 +5,7 @@ import edu.self.sams.dto.ScheduleClassDto;
 import edu.self.sams.dto.StudentDto;
 import edu.self.sams.service.ServiceFactory;
 import edu.self.sams.service.custom.AttendanceService;
+import edu.self.sams.service.custom.ScheduleClassService;
 import edu.self.sams.service.custom.StudentService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,7 @@ public class AttendanceMarkController implements Initializable {
 
     private StudentService studentService = (StudentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.STUDENT);
     private AttendanceService attendanceService = (AttendanceService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.ATTENDANCE);
+    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SHEDULECLASS);
 
     public void setScheduleClass(ScheduleClassDto scheduleClass) {
         this.scheduleClass = scheduleClass;
@@ -80,6 +82,7 @@ public class AttendanceMarkController implements Initializable {
                     AttendanceDto attendanceDto = new AttendanceDto(
                         scheduleClass.getClassId(),
                         student.getRegNo(),
+                        student.getName(),
                         student.getStatus(),
                         student.getRemark() != null ? student.getRemark() : ""
                     );
@@ -94,7 +97,9 @@ public class AttendanceMarkController implements Initializable {
 
             String result = attendanceService.saveAttendanceList(attendanceList);
             showAlert(Alert.AlertType.INFORMATION, "Attendance Submission", result);
-            
+            scheduleClass.setStatus("done");
+            String resp = scheduleClassService.updateScheduleClass(scheduleClass);
+
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to save attendance: " + e.getMessage());
             e.printStackTrace();

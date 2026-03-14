@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface ScheduleClassDao extends CrudDao<ScheduleClassEntity,String> {
     public String getLastClassId();
     public ArrayList<ScheduleClassEntity> getScheduleClassByUserId(String userId);
+    public String getClassIdByDetails(String courseCode,String subjectCode,int batch,String date);
 }

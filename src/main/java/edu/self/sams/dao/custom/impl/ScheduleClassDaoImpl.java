@@ -3,6 +3,7 @@ package edu.self.sams.dao.custom.impl;
 import edu.self.sams.dao.custom.ScheduleClassDao;
 import edu.self.sams.entity.*;
 import edu.self.sams.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -146,6 +147,40 @@ public class ScheduleClassDaoImpl implements ScheduleClassDao {
 
         } catch (Exception e) {
             throw e;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public String getClassIdByDetails(String courseCode, String subjectCode, int batch, String date) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String hql = "SELECT s.classId FROM ScheduleClassEntity s " +
+                    "JOIN s.course c " +
+                    "JOIN s.subject sub " +
+                    "WHERE c.courseCode = :courseCode " +
+                    "AND sub.subjectCode = :subjectCode " +
+                    "AND s.batch = :batch " +
+                    "AND s.date = :date " +
+                    "AND s.status = :status";
+
+            Query<String> query = session.createQuery(hql, String.class);
+
+            query.setParameter("courseCode", courseCode);
+            query.setParameter("subjectCode", subjectCode);
+            query.setParameter("batch", batch);
+            query.setParameter("date", date);
+            query.setParameter("status", "done");
+
+            return query.getSingleResult();
+
+        } catch (HibernateException e) {
+            throw new RuntimeException(e);
         } finally {
             if (session != null) {
                 session.close();

@@ -2,6 +2,7 @@ package edu.self.sams.service.custom.impl;
 
 import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.AttendanceDao;
+import edu.self.sams.dao.custom.ScheduleClassDao;
 import edu.self.sams.dto.AttendanceDto;
 import edu.self.sams.entity.AttendanceEntity;
 import edu.self.sams.entity.AttendanceId;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class AttendanceServiceImpl implements AttendanceService {
 
     private AttendanceDao attendanceDao = (AttendanceDao) DaoFactory.getInstance().getDao(DaoFactory.daoType.ATTENDANCE);
+    private ScheduleClassDao scheduleClassDao = (ScheduleClassDao) DaoFactory.getInstance().getDao(DaoFactory.daoType.SCHEDULECLASS);
 
     @Override
     public boolean saveAttendance(AttendanceDto attendanceDto) throws Exception {
@@ -108,34 +110,37 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public AttendanceDto getAttendance(String classId, String regNo) throws Exception {
-        AttendanceId attendanceId = new AttendanceId(classId, regNo);
-        AttendanceEntity attendanceEntity = attendanceDao.get(attendanceId);
-        if (attendanceEntity != null) {
-            return new AttendanceDto(
-                attendanceEntity.getId().getClassId(),
-                attendanceEntity.getId().getRegNo(),
-                attendanceEntity.getStatus(),
-                attendanceEntity.getRemark()
-            );
-        }
         return null;
     }
 
     @Override
     public ArrayList<AttendanceDto> getAllAttendance() throws Exception {
-        ArrayList<AttendanceEntity> attendanceEntities = attendanceDao.getAll();
-        if (attendanceEntities != null) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<AttendanceDto> getAttendanceByClassId(String classId) throws Exception {
+        ArrayList<AttendanceEntity>  attendanceEntities = attendanceDao.getAttendanceByClassId(classId);
+        if(attendanceEntities != null){
             ArrayList<AttendanceDto> attendanceDtos = new ArrayList<>();
-            for (AttendanceEntity entity : attendanceEntities) {
-                attendanceDtos.add(new AttendanceDto(
-                    entity.getId().getClassId(),
-                    entity.getId().getRegNo(),
-                    entity.getStatus(),
-                    entity.getRemark()
-                ));
+            for (AttendanceEntity attendanceEntity : attendanceEntities) {
+                attendanceDtos.add(new AttendanceDto(attendanceEntity.getScheduleClass().getClassId(),attendanceEntity.getStudent().getRegNo(),attendanceEntity.getStudent().getName(),attendanceEntity.getStatus(),attendanceEntity.getRemark()));
             }
             return attendanceDtos;
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<AttendanceDto> getAttendanceList(String courseCode, String subjectCode, int batch, String date) {
+        try{
+            String classId = scheduleClassDao.getClassIdByDetails(courseCode, subjectCode, batch, date);
+            if(classId != null){
+                return getAttendanceByClassId(classId);
+            }
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -3,15 +3,17 @@ package edu.self.sams.dto;
 public class AttendanceDto {
     private String classId;
     private String regNo;
+    private String name;
     private String status;
     private String remark;
 
     public AttendanceDto() {
     }
 
-    public AttendanceDto(String classId, String regNo, String status, String remark) {
+    public AttendanceDto(String classId, String regNo, String name, String status, String remark) {
         this.classId = classId;
         this.regNo = regNo;
+        this.name = name;
         this.status = status;
         this.remark = remark;
     }
@@ -30,6 +32,14 @@ public class AttendanceDto {
 
     public void setRegNo(String regNo) {
         this.regNo = regNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getStatus() {

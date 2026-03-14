@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +14,7 @@
 
 <AnchorPane fx:id="ancReport" prefHeight="506.0" prefWidth="715.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.self.sams.controller.ReportController">
    <children>
-      <Label layoutX="408.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Reports" textAlignment="CENTER">
+      <Label layoutX="327.0" layoutY="23.0" style="-fx-font-weight: bold;" text="Attendance Reports" textAlignment="CENTER">
          <font>
             <Font size="30.0" />
          </font>
@@ -64,5 +68,46 @@
             </Button>
          </children>
       </Pane>
+      <ComboBox fx:id="comboCourse" layoutX="341.0" layoutY="91.0" prefHeight="25.0" prefWidth="256.0" />
+      <ComboBox fx:id="comboSubject" layoutX="341.0" layoutY="135.0" prefHeight="25.0" prefWidth="256.0" />
+      <Label layoutX="246.0" layoutY="90.0" prefHeight="27.0" prefWidth="59.0" style="-fx-font-weight: bold;" text="Course">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="246.0" layoutY="134.0" prefHeight="27.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Subject">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="246.0" layoutY="181.0" prefHeight="27.0" prefWidth="68.0" style="-fx-font-weight: bold;" text="Batch">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="360.0" layoutY="181.0" prefHeight="27.0" prefWidth="169.0" style="-fx-font-weight: bold;" text="Date(yyyy-MM-DD)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="621.0" layoutY="90.0" mnemonicParsing="false" onAction="#searchSubjects" prefHeight="27.0" prefWidth="46.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Ok" textFill="WHITE" />
+      <TableView fx:id="tblReports" layoutX="241.0" layoutY="285.0" prefHeight="211.0" prefWidth="452.0">
+        <columns>
+           <TableColumn fx:id="colRegNo" prefWidth="75.0" text="Reg.No" />
+          <TableColumn fx:id="colName" prefWidth="75.0" text="Student Name" />
+          <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
+           <TableColumn fx:id="colRemark" prefWidth="75.0" text="Remark" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <TextField fx:id="txtBatch" layoutX="246.0" layoutY="214.0" prefHeight="25.0" prefWidth="68.0" />
+      <TextField fx:id="txtDate" layoutX="387.0" layoutY="214.0" prefHeight="25.0" prefWidth="114.0" />
+      <Button layoutX="588.0" layoutY="205.0" mnemonicParsing="false" onAction="#clickOnSearch" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Search" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
