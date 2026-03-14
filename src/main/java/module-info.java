@@ -6,6 +6,8 @@ module edu.self.sams.studentattendancemanagementsystem {
     requires org.hibernate.orm.core;
     requires jakarta.persistence;
     requires java.naming;
+    requires kernel;
+    requires layout;
 
 
     opens edu.self.sams to javafx.fxml;

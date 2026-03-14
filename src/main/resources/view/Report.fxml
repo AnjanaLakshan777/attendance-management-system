@@ -91,7 +91,7 @@
          </font>
       </Label>
       <Button layoutX="621.0" layoutY="90.0" mnemonicParsing="false" onAction="#searchSubjects" prefHeight="27.0" prefWidth="46.0" style="-fx-background-color: #ab66e3; -fx-font-weight: bold;" text="Ok" textFill="WHITE" />
-      <TableView fx:id="tblReports" layoutX="241.0" layoutY="285.0" prefHeight="211.0" prefWidth="452.0">
+      <TableView fx:id="tblReports" layoutX="241.0" layoutY="259.0" prefHeight="186.0" prefWidth="452.0">
         <columns>
            <TableColumn fx:id="colRegNo" prefWidth="75.0" text="Reg.No" />
           <TableColumn fx:id="colName" prefWidth="75.0" text="Student Name" />
@@ -105,6 +105,11 @@
       <TextField fx:id="txtBatch" layoutX="246.0" layoutY="214.0" prefHeight="25.0" prefWidth="68.0" />
       <TextField fx:id="txtDate" layoutX="387.0" layoutY="214.0" prefHeight="25.0" prefWidth="114.0" />
       <Button layoutX="588.0" layoutY="205.0" mnemonicParsing="false" onAction="#clickOnSearch" prefHeight="34.0" prefWidth="92.0" style="-fx-font-weight: bold; -fx-background-color: #0d6cd9;" text="Search" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button layoutX="577.0" layoutY="458.0" mnemonicParsing="false" onAction="#clickOnDownload" prefHeight="34.0" prefWidth="114.0" style="-fx-font-weight: bold; -fx-background-color: green;" text="Download PDF" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
