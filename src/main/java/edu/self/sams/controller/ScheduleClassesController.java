@@ -72,7 +72,7 @@ public class ScheduleClassesController implements Initializable {
     private CourseService courseService = (CourseService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.COURSE);
     private SubjectService subjectService = (SubjectService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SUBJECT);
     private LecturerService lecturerService = (LecturerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.LECTURER);
-    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SHEDULECLASS);
+    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SCHEDULECLASS);
 
     public static void loadScheduleClass() throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(ScheduleClassesController.class.getResource("/view/ScheduleClasses.fxml"));

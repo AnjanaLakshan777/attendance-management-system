@@ -149,10 +149,22 @@ public class ReportController implements Initializable {
 
     public void clickOnSearch(ActionEvent actionEvent) {
         tblReports.getItems().clear();
+
+        if(comboCourse.getValue()==null || comboSubject.getValue()==null || txtBatch.getText().isBlank() || txtDate.getText().isBlank()){
+            new Alert(Alert.AlertType.ERROR, "Please fill all the fields").showAndWait();
+            return;
+        }
+
         String courseCode = comboCourse.getValue().toString().substring(0,4);
         String subjectCode = comboSubject.getValue().toString().substring(0,6);
-        int batch = Integer.parseInt(txtBatch.getText());
-        String date = txtDate.getText();
+        int batch;
+        try{
+            batch = Integer.parseInt(txtBatch.getText().trim());
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Batch must be a valid number").showAndWait();
+            return;
+        }
+        String date = txtDate.getText()==null?"":txtDate.getText();
 
         boolean isDateValid = dateValidation(date);
         if(isDateValid){

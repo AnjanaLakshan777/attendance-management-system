@@ -28,16 +28,16 @@ public class ServiceFactory {
                 return new LecturerServiceImpl();
             case ENROLLMENT:
                 return new EnrollmentServiceImpl();
-            case SHEDULECLASS:
+            case SCHEDULECLASS:
                 return new ScheduleClassServiceImpl();
             case ATTENDANCE:
                 return new AttendanceServiceImpl();
             default:
-                return null;
+                throw new IllegalArgumentException("Unknown service type: " + serviceType);
         }
     }
 
     public enum ServiceType {
-        USER,COURSE,SUBJECT,STUDENT, LECTURER, ENROLLMENT,SHEDULECLASS, ATTENDANCE
+        USER,COURSE,SUBJECT,STUDENT, LECTURER, ENROLLMENT,SCHEDULECLASS, ATTENDANCE
     }
 }

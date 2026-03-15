@@ -1,6 +1,7 @@
 module edu.self.sams.studentattendancemanagementsystem {
     requires javafx.controls;
     requires javafx.fxml;
+    requires transitive javafx.graphics;
     requires java.xml;
     requires java.sql;
     requires org.hibernate.orm.core;
@@ -8,7 +9,7 @@ module edu.self.sams.studentattendancemanagementsystem {
     requires java.naming;
     requires kernel;
     requires layout;
-
+    requires bcrypt;
 
     opens edu.self.sams to javafx.fxml;
     opens edu.self.sams.controller to javafx.fxml;
@@ -16,6 +17,4 @@ module edu.self.sams.studentattendancemanagementsystem {
     opens edu.self.sams.dto to javafx.base;
 
     exports edu.self.sams;
-    exports edu.self.sams.controller;
-    exports edu.self.sams.entity;
 }

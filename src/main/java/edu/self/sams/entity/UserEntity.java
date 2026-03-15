@@ -8,7 +8,7 @@ public class UserEntity {
     @Id
     @Column(name="user_id", length=50)
     private String userId;
-    @Column(name="password",  nullable=false, length=50)
+    @Column(name="password",  nullable=false, length=100)
     private String password;
     @Column(name="role", nullable = false, length=50)
     private String role;

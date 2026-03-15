@@ -48,7 +48,7 @@ public class AttendanceMarkController implements Initializable {
 
     private StudentService studentService = (StudentService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.STUDENT);
     private AttendanceService attendanceService = (AttendanceService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.ATTENDANCE);
-    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SHEDULECLASS);
+    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SCHEDULECLASS);
 
     public void setScheduleClass(ScheduleClassDto scheduleClass) {
         this.scheduleClass = scheduleClass;

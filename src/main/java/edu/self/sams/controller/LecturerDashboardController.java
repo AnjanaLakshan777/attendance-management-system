@@ -47,7 +47,7 @@ public class LecturerDashboardController implements Initializable {
 
     private String userId;
 
-    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SHEDULECLASS);
+    private ScheduleClassService scheduleClassService = (ScheduleClassService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.SCHEDULECLASS);
     private LecturerService lecturerService = (LecturerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.LECTURER);
 
     public void setUserId(String userId) throws Exception {

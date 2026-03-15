@@ -39,8 +39,14 @@ public class LoginController {
 
     public void clickLogin(ActionEvent actionEvent) throws Exception {
 
-        String userId = txtUserId.getText().trim();
-        String password = txtPassword.getText().trim();
+        String userId = txtUserId.getText()==null?"":txtUserId.getText().trim();
+        String password = txtPassword.getText()==null?"":txtPassword.getText().trim();
+
+        if(comboRole.getValue()==null || userId.isBlank() || password.isBlank()) {
+            new Alert(Alert.AlertType.ERROR, "Please fill all the fields").showAndWait();
+            return;
+        }
+
         String role = comboRole.getValue().toString().trim();
 
         if(role.equals("Admin")){

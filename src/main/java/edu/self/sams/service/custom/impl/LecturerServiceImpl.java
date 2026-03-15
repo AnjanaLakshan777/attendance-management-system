@@ -1,5 +1,6 @@
 package edu.self.sams.service.custom.impl;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import edu.self.sams.dao.DaoFactory;
 import edu.self.sams.dao.custom.LecturerDao;
 import edu.self.sams.dto.LecturerDto;
@@ -18,7 +19,8 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public String saveLecturer(LecturerDto lecturerDto) throws Exception {
-        UserEntity  userEntity = new UserEntity(lecturerDto.getUserId(),lecturerDto.getPassword(),"LECTURER");
+        String hashedPassword = BCrypt.withDefaults().hashToString(12,lecturerDto.getPassword().toCharArray());
+        UserEntity  userEntity = new UserEntity(lecturerDto.getUserId(),hashedPassword,"LECTURER");
         LecturerEntity  lecturerEntity = new LecturerEntity(lecturerDto.getUserId(),lecturerDto.getName(),lecturerDto.getEmail(),lecturerDto.getTeleNo(),userEntity);
         boolean isSaved = lecturerDao.save(lecturerEntity);
         return isSaved?"Lecturer Saved Successfully":"Lecturer Save Failed";
@@ -26,7 +28,8 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public String updateLecturer(LecturerDto lecturerDto) throws Exception {
-        UserEntity  userEntity = new UserEntity(lecturerDto.getUserId(),lecturerDto.getPassword(),"LECTURER");
+        String hashedPassword = BCrypt.withDefaults().hashToString(6,lecturerDto.getPassword().toCharArray());
+        UserEntity  userEntity = new UserEntity(lecturerDto.getUserId(),hashedPassword,"LECTURER");
         LecturerEntity  lecturerEntity = new LecturerEntity(lecturerDto.getUserId(),lecturerDto.getName(),lecturerDto.getEmail(),lecturerDto.getTeleNo(),userEntity);
         boolean isUpdated = lecturerDao.update(lecturerEntity);
         return isUpdated?"Lecturer Update Successfully":"Lecturer Update Failed";
