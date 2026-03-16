@@ -203,4 +203,18 @@ public class SubjectDaoImpl implements SubjectDao {
             }
         }
     }
+
+    @Override
+    public int getTotalSubjects() throws Exception {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Long count = session.createQuery("SELECT COUNT(sub) FROM SubjectEntity sub", Long.class).uniqueResult();
+            return count == null ? 0 : count.intValue();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

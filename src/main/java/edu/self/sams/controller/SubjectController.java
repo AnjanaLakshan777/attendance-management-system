@@ -163,7 +163,7 @@ public class SubjectController implements Initializable {
                 new Alert(Alert.AlertType.ERROR,"Subject not found").showAndWait();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 

@@ -125,4 +125,18 @@ public class StudentDaoImpl implements StudentDao {
             }
         }
     }
+
+    @Override
+    public int getTotalStudents() throws Exception {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Long count = session.createQuery("SELECT COUNT(s) FROM StudentEntity s", Long.class).uniqueResult();
+            return count == null ? 0 : count.intValue();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

@@ -81,4 +81,9 @@ public class CourseServiceImpl implements CourseService {
         }
         return courseSubjectDtos;
     }
+
+    @Override
+    public int getTotalCourses() throws Exception {
+        return courseDao.getTotalCourses();
+    }
 }

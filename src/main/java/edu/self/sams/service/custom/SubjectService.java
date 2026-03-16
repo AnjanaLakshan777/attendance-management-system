@@ -18,4 +18,5 @@ public interface SubjectService extends SuperService {
     public boolean assignLecturer(String subjectCode, String userId) throws Exception;
     public boolean unassignLecturer(String subjectCode, String userId) throws Exception;
     public ArrayList<SubjectLecturerDto> findLecturersBySubjectCode(String subjectCode) throws Exception;
+    public int getTotalSubjects() throws Exception;
 }

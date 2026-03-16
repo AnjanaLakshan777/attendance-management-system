@@ -5,4 +5,5 @@ import edu.self.sams.entity.LecturerEntity;
 
 public interface LecturerDao extends CrudDao<LecturerEntity, String> {
     LecturerEntity findLecturerWithSubjects(String userId)  throws Exception;
+    int getTotalLecturers() throws Exception;
 }

@@ -15,4 +15,5 @@ public interface CourseService extends SuperService {
     public String assignSubject(String courseCode, String subjectCode) throws Exception;
     public String unassignSubject(String courseCode, String subjectCode) throws Exception;
     public ArrayList<CourseSubjectDto> findSubjectsByCourseCode(String courseCode) throws Exception;
+    public int getTotalCourses() throws Exception;
 }

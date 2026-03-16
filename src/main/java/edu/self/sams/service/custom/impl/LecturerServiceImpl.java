@@ -28,7 +28,7 @@ public class LecturerServiceImpl implements LecturerService {
 
     @Override
     public String updateLecturer(LecturerDto lecturerDto) throws Exception {
-        String hashedPassword = BCrypt.withDefaults().hashToString(6,lecturerDto.getPassword().toCharArray());
+        String hashedPassword = BCrypt.withDefaults().hashToString(12,lecturerDto.getPassword().toCharArray());
         UserEntity  userEntity = new UserEntity(lecturerDto.getUserId(),hashedPassword,"LECTURER");
         LecturerEntity  lecturerEntity = new LecturerEntity(lecturerDto.getUserId(),lecturerDto.getName(),lecturerDto.getEmail(),lecturerDto.getTeleNo(),userEntity);
         boolean isUpdated = lecturerDao.update(lecturerEntity);
@@ -75,5 +75,10 @@ public class LecturerServiceImpl implements LecturerService {
             }
         }
         return subjectLecturerDtos;
+    }
+
+    @Override
+    public int getTotalLecturers() throws Exception {
+        return lecturerDao.getTotalLecturers();
     }
 }

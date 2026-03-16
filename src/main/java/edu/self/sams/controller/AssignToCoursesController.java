@@ -78,10 +78,8 @@ public class AssignToCoursesController implements Initializable {
             }else{
                 new Alert(Alert.AlertType.INFORMATION,"No assigned subjects found for this course").show();
             }
-        }catch(Exception e){
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR,"Error loading subjects: " + e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Error loading subjects: " + e.getMessage()).showAndWait();
         }
         comboSubject.getSelectionModel().clearSelection();
     }
@@ -99,9 +97,7 @@ public class AssignToCoursesController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"No assigned courses found for this subject").show();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR,"Error loading courses: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading courses: " + e.getMessage()).showAndWait();
         }
         comboCourse.getSelectionModel().clearSelection();
     }
@@ -147,12 +143,10 @@ public class AssignToCoursesController implements Initializable {
                 tblCourseSubject.getItems().clear();
                 courseSubjects.clear();
             } else {
-                new Alert(Alert.AlertType.ERROR,"Assigned: " + successCount + ", Failed: " + failCount).showAndWait();
-                System.out.println("Failed assignments:" + failedAssignments.toString());
+                new Alert(Alert.AlertType.ERROR, "Assigned: " + successCount + ", Failed: " + failCount + failedAssignments).showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to assign subjects: " + e.getMessage()).showAndWait();
         }
         comboCourse.getSelectionModel().clearSelection();
         comboSubject.getSelectionModel().clearSelection();
@@ -183,12 +177,10 @@ public class AssignToCoursesController implements Initializable {
                 tblCourseSubject.getItems().clear();
                 courseSubjects.clear();
             } else {
-                new Alert(Alert.AlertType.ERROR,"Unassigned: " + successCount + ", Failed: " + failCount).showAndWait();
-                System.out.println("Failed unassignments:" + failedUnassignments.toString());
+                new Alert(Alert.AlertType.ERROR, "Unassigned: " + successCount + ", Failed: " + failCount + failedUnassignments).showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to unassign subjects: " + e.getMessage()).showAndWait();
         }
     }
 

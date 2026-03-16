@@ -248,7 +248,7 @@ public class ScheduleClassesController implements Initializable {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
     public void clickSubjectFill(ActionEvent actionEvent) {
@@ -262,7 +262,7 @@ public class ScheduleClassesController implements Initializable {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 

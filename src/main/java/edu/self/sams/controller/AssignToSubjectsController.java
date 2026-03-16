@@ -1,6 +1,5 @@
 package edu.self.sams.controller;
 
-import edu.self.sams.dto.CourseSubjectDto;
 import edu.self.sams.dto.LecturerDto;
 import edu.self.sams.dto.SubjectDto;
 import edu.self.sams.dto.SubjectLecturerDto;
@@ -17,7 +16,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -77,9 +75,7 @@ public class AssignToSubjectsController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"No assigned lecturers found for this subject").show();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR,"Error loading lecturers: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading lecturers: " + e.getMessage()).showAndWait();
         }
         comboLecturer.getSelectionModel().clearSelection();
     }
@@ -97,9 +93,7 @@ public class AssignToSubjectsController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"No assigned subjects found for this lecturer").show();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR,"Error loading subjects: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Error loading subjects: " + e.getMessage()).showAndWait();
         }
         comboSubject.getSelectionModel().clearSelection();
     }
@@ -143,13 +137,11 @@ public class AssignToSubjectsController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Success! All " + successCount + " Lecturers assigned.").showAndWait();
                 tblSubjectLecturer.getItems().clear();
                 subjectLecturers.clear();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Assigned: " + successCount + ", Failed: " + failCount).showAndWait();
-                System.out.println("Failed assignments:" + failedAssignments.toString());
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Assigned: " + successCount + ", Failed: " + failCount + failedAssignments).showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to assign lecturers: " + e.getMessage()).showAndWait();
         }
         comboSubject.getSelectionModel().clearSelection();
         comboLecturer.getSelectionModel().clearSelection();
@@ -177,13 +169,11 @@ public class AssignToSubjectsController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION,"Success! All " + successCount + " Lecturers Unassigned.").showAndWait();
                 tblSubjectLecturer.getItems().clear();
                 subjectLecturers.clear();
-            }else{
-                new Alert(Alert.AlertType.ERROR,"Unassigned: " + successCount + ", Failed: " + failCount).showAndWait();
-                System.out.println("Failed unassignments:" + failedAssignments.toString());
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Unassigned: " + successCount + ", Failed: " + failCount + failedAssignments).showAndWait();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to unassign lecturers: " + e.getMessage()).showAndWait();
         }
         comboSubject.getSelectionModel().clearSelection();
         comboLecturer.getSelectionModel().clearSelection();

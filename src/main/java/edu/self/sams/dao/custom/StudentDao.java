@@ -7,4 +7,5 @@ import java.util.ArrayList;
 
 public interface StudentDao extends CrudDao<StudentEntity,String> {
     ArrayList<StudentEntity> getStudentsByCourseAndBatch(String courseCode, int batch) throws Exception;
+    int getTotalStudents() throws Exception;
 }

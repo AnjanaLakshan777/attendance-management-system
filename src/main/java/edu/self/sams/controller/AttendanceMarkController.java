@@ -102,7 +102,6 @@ public class AttendanceMarkController implements Initializable {
 
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error", "Failed to save attendance: " + e.getMessage());
-            e.printStackTrace();
         }
     }
     
@@ -142,7 +141,8 @@ public class AttendanceMarkController implements Initializable {
             ObservableList<StudentDto> list = FXCollections.observableArrayList(studentDtos);
             tblAttendance.setItems(list);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

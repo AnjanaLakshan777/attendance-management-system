@@ -43,9 +43,9 @@ public class ReportController implements Initializable {
     @FXML
     private AnchorPane ancReport;
     @FXML
-    private ComboBox comboCourse;
+    private ComboBox<String> comboCourse;
     @FXML
-    private ComboBox comboSubject;
+    private ComboBox<String> comboSubject;
     @FXML
     private TextField txtBatch;
     @FXML
@@ -124,7 +124,7 @@ public class ReportController implements Initializable {
                 comboSubject.getItems().add(courseSubjectDto.getSubjectCode()+"-"+courseSubjectDto.getSubjectName());
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 
@@ -173,7 +173,7 @@ public class ReportController implements Initializable {
                 ObservableList<AttendanceDto> list = FXCollections.observableArrayList(attendanceDtos);
                 tblReports.setItems(list);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
             }
         }
     }

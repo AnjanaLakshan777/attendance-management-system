@@ -13,4 +13,5 @@ public interface StudentService extends SuperService {
     public StudentDto getStudent(String regNo) throws Exception;
     public ArrayList<StudentDto> getStudents() throws Exception;
     public ArrayList<StudentDto> getStudentsByCourseAndBatch(String course, int batch) throws Exception;
+    public int getTotalStudents() throws Exception;
 }

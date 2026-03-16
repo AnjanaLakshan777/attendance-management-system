@@ -77,7 +77,7 @@ public class EnrollToCoursesController implements Initializable {
             ObservableList<TblEnrollmentDto> list = FXCollections.observableArrayList(tblEnrollmentDtos);
             tblEnrollment.setItems(list);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 
@@ -88,7 +88,7 @@ public class EnrollToCoursesController implements Initializable {
             ObservableList<TblEnrollmentDto> list = FXCollections.observableArrayList(tblEnrollmentDtos);
             tblEnrollment.setItems(list);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).showAndWait();
         }
     }
 

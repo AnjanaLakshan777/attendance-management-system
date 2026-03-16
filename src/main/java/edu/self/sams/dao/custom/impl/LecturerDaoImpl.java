@@ -121,4 +121,18 @@ public class LecturerDaoImpl implements LecturerDao {
             }
         }
     }
+
+    @Override
+    public int getTotalLecturers() throws Exception {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Long count = session.createQuery("SELECT COUNT(l) FROM LecturerEntity l", Long.class).uniqueResult();
+            return count == null ? 0 : count.intValue();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 }

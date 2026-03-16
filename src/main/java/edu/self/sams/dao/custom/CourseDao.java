@@ -7,4 +7,5 @@ public interface CourseDao extends CrudDao<CourseEntity,String> {
     boolean assignSubject(String courseCode, String subjectCode) throws Exception;
     boolean unassignSubject(String courseCode, String subjectCode) throws Exception;
     CourseEntity findCourseWithSubjects(String courseCode) throws Exception;
+    int getTotalCourses() throws Exception;
 }

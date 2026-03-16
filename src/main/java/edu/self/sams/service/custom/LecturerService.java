@@ -16,4 +16,5 @@ public interface LecturerService extends SuperService {
     public ArrayList<LecturerDto> getLecturers() throws Exception;
 
     public ArrayList<SubjectLecturerDto> findSubjectsByUserId(String userId) throws Exception;
+    public int getTotalLecturers() throws Exception;
 }

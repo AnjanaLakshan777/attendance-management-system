@@ -188,4 +188,18 @@ public class CourseDaoImpl implements CourseDao {
             }
         }
     }
+
+    @Override
+    public int getTotalCourses() throws Exception {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            Long count = session.createQuery("SELECT COUNT(c) FROM CourseEntity c", Long.class).uniqueResult();
+            return count == null ? 0 : count.intValue();
+        }finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+    }
 }

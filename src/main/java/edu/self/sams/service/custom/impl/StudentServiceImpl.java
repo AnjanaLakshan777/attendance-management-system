@@ -67,4 +67,9 @@ public class StudentServiceImpl implements StudentService {
         }
         return null;
     }
+
+    @Override
+    public int getTotalStudents() throws Exception {
+        return studentDao.getTotalStudents();
+    }
 }

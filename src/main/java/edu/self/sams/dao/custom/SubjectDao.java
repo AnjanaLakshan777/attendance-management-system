@@ -9,4 +9,5 @@ public interface SubjectDao extends CrudDao<SubjectEntity,String>{
     boolean assignLecturer(String subjectCode,String userId) throws Exception;
     boolean unassignLecturer(String subjectCode,String userId) throws Exception;
     SubjectEntity findSubjectWithLecturers(String subjectCode) throws Exception;
+    int getTotalSubjects() throws Exception;
 }

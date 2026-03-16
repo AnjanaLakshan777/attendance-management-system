@@ -95,4 +95,9 @@ public class SubjectServiceImpl implements SubjectService {
         }
         return subjectLecturerDtos;
     }
+
+    @Override
+    public int getTotalSubjects() throws Exception {
+        return subjectDao.getTotalSubjects();
+    }
 }
